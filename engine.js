@@ -61,12 +61,9 @@ container = {
 
 character = {
     name: null,
-    maxhealth: null,
-    health: null,
-    pos: {x: null, y: null, rotation: null},
-    status: null,
+    pos: {lat: null, lng: null, alt: null},
     //Makes an inventory container for the character with a size of 5.
-    inventory: container.create("inventory", 5),
+    inventory: container.create("inventory", 5)
 }
 
 //A function that creates choice groups for dialogue and other options that takes an array of choice objects with the paramaters "condition", "option" and "result". Condition is when this option is available within this choice group, option is the words of the option and result is a function that happens if this option is selected. Also takes an optional  intro which is the string that is displayed before the choices.
@@ -92,7 +89,7 @@ makechoice = function(choices,intro){
              output.push(this.choices[i].option);   
             }
         }
-            return intro + "\n" + output.join("\n");
+            return {intro:intro, choices:output};
 }
 }
 }
