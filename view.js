@@ -4,7 +4,11 @@ $(document).ready(function(){
     
 $("body").on("click", "#makequest", function(){
 $(this).remove();
-$("#forms").html("<form id='newquest'><h2>Make an adventure!</h2><label for='name'>Name</label><input name='name' /><br /><label for='description'>Description</label><textarea name='description'></textarea><br /><input type='submit' value='Create'></form>");
+$("#forms").html("<form id='newquest'></form>");
+$("#newquest").append("<h2>Make an adventure!</h2>");
+$("#newquest").append("<label for='name'>Name</label><input name='name' /><br />");
+$("#newquest").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
+$("#newquest").append("<input type='submit' value='Create'></form>");
 });
 
 //Submit new quest form
@@ -18,11 +22,21 @@ $("#forms").html(" ");
 $("#makepoint").show();
 });
     
+//Submit new point form
+    
+$("#forms").on("submit", "#newpoint", function( event ) {
+event.preventDefault();
+$("#forms").html(" ");
+});
+    
 //Create a point form
     
 $("body").on("click", "#makepoint", function(){
-$(this).remove();
-console.log("making questions");
+$("#forms").append("<form id='newpoint'></form>");
+$("#newpoint").append("<h2>Make a new point</h2>");
+$("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />");
+$("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
+$("#newpoint").append("<input type='submit' value='Create'></form>");
 });
 
 
