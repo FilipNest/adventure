@@ -70,13 +70,29 @@ A.Container = {
 A.Quest = {
     name: null,
     description: null,
-    questions: [],
+    points: [],
     create: function(name,description){
-    W.Q = Object.create(this);
-    W.Q.name = name;
-    W.Q.description = description;
-    W.Q.player = Object.create(A.Character);
+        W.Q = Object.create(this);
+        W.Q.name = name;
+        W.Q.description = description;
+        W.Q.player = Object.create(A.Character);
+        W.Q.points = [];
+        },
+    newpoint: function(name,description,options){
+        var point = Object.create(A.Point);
+        point.name = name;
+        point.description = description;
+        W.Q.points.push(point);
     }
+}
+
+//Create a questpoint type
+
+A.Point = {
+    name: null,
+    description: null,
+    pos: {lat: null, lng: null, alt: null},
+    options: []
 }
 
 //Create a character type

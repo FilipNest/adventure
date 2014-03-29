@@ -53,6 +53,9 @@ form.append("<input /><button>Remove</button>");
     
 $("#forms").on("submit", "#newpoint", function( event ) {
 event.preventDefault();
+var name = $("#newpoint input[name=name]").val();
+var desc = $("#newpoint textarea[name=description]").val();
+A.Quest.newpoint(name,desc);
 $("#forms").html(" ");
 });
 

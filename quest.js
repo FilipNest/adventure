@@ -1,6 +1,8 @@
 /*
 
-W.Q.questions[0] = A.MakeChoice([
+W.Q.points = [];
+
+W.Q.points[0].questions = A.MakeChoice([
     {
         condition:1<5,
         option:"Eat a sandwich",
