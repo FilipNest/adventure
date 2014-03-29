@@ -1,4 +1,8 @@
-container = {
+//World wrapper
+
+world = {};
+
+Container = {
     //Shortcut function for creating a new container. Takes a name string, a size number and an array of objects [{name:name, size:size},etc]
     create: function (name, size, contents) {
         if (!contents) {
@@ -57,18 +61,51 @@ container = {
     }
 };
 
+//Create a quest type
+
+Quest = {
+    name: null,
+    description: null,
+    questions: [],
+    character: {
+        values: {  
+            red: null,
+            orange: null,
+            yellow: null,
+            green: null,
+            blue: null,
+            indigo: null,
+            violet: null},
+        inventory: null
+    },
+    create: function(name,description,character){
+    world.quest = Object.create(this);
+    world.quest.name = name;
+    world.quest.description = description
+    }
+}
+
 //Create a character type
 
-character = {
+Character = {
     name: null,
     pos: {lat: null, lng: null, alt: null},
+    //Values
+    red: null,
+    orange: null,
+    yellow: null,
+    green: null,
+    blue: null,
+    indigo: null,
+    violet: null,
     //Makes an inventory container for the character with a size of 5.
-    inventory: container.create("inventory", 5)
+    inventory: Container.create("inventory", 0)
 }
+
 
 //A function that creates choice groups for dialogue and other options that takes an array of choice objects with the paramaters "condition", "option" and "result". Condition is when this option is available within this choice group, option is the words of the option and result is a function that happens if this option is selected. Also takes an optional  intro which is the string that is displayed before the choices.
 
-makechoice = function(choices,intro){
+MakeChoice = function(choices,intro){
     var i=0,
         ChoiceGroup = [];
     for(i=0; i<choices.length; i += 1){

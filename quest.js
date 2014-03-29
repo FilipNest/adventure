@@ -1,8 +1,8 @@
-var quest= {}
+Quest.create("Hello","A development adventure");
 
 //Example choice display
 
-quest.TestQuestion = makechoice([
+world.quest.questions[0] = MakeChoice([
     {
         condition:1<5,
         option:"Eat a sandwich",
@@ -17,26 +17,26 @@ quest.TestQuestion = makechoice([
 
 //To show this choice use
 
-quest.TestQuestion.show();
+world.quest.questions[0].show();
 
 //To pick answer 2 use
 
-quest.TestQuestion.choices[1].choose();
+world.quest.questions[0].choices[1].choose();
 
 
 //Create the player with some settings
 
-quest.player = Object.create(character);
-quest.player.name = "Player";
+world.quest.player = Object.create(Character);
+world.quest.player.name = "Player";
 
 //Create a test box and some items to play with
-quest.box = container.create("box", 5);
-quest.amulet = {name:"amulet",size:2};
-quest.torch = {name:"torch",size:2};
-quest.theremin = {name:"theremin", size:4};
+world.quest.box = Container.create("box", 5);
+world.quest.amulet = {name:"amulet",size:2};
+world.quest.torch = {name:"torch",size:2};
+world.quest.theremin = {name:"theremin", size:4};
 //Some examples:
-quest.player.inventory.receive(quest.amulet);
-quest.player.inventory.give("amulet",quest.box);
+world.quest.player.inventory.receive(world.quest.amulet);
+world.quest.player.inventory.give("amulet",world.quest.box);
 //The box should now have the amulet. Check this as follows.
-quest.box.checkitem("amulet");
+world.quest.box.checkitem("amulet");
 //Checks if the box has the amulet and returns the position of the amulet in the box's contents array.
