@@ -1,4 +1,4 @@
-//Options set one
+/*
 
 W.Q.questions[0] = A.MakeChoice([
     {
@@ -22,3 +22,5 @@ W.Q.player.inventory.give("amulet",W.Q.box);
 //The box should now have the amulet. Check this as follows.
 W.Q.box.checkitem("amulet");
 //Checks if the box has the amulet and returns the position of the amulet in the box's contents array.
+
+*/

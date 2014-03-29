@@ -3,19 +3,28 @@ $(document).ready(function(){
 //Toggle new quest form
     
 $("body").on("click", "#makequest", function(){
-$(this).hide();
-$("#newquest").show();
-    
+$(this).remove();
+$("#forms").html("<form id='newquest'><h2>Make an adventure!</h2><label for='name'>Name</label><input name='name' /><br /><label for='description'>Description</label><textarea name='description'></textarea><br /><input type='submit' value='Create'></form>");
 });
 
 //Submit new quest form
     
-$( "#newquest" ).submit(function( event ) {
+$("#forms").on("submit", "#newquest", function( event ) {
 event.preventDefault();
 var name = $("#newquest input[name=name]").val();
 var desc = $("#newquest textarea[name=description]").val();
 A.Quest.create(name,desc);
+$("#forms").html(" ");
+$("#makepoint").show();
 });
+    
+//Create a point form
+    
+$("body").on("click", "#makepoint", function(){
+$(this).remove();
+console.log("making questions");
+});
+
 
 // Show question list
 
