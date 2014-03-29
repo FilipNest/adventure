@@ -82,6 +82,7 @@ A.Quest = {
         var point = Object.create(A.Point);
         point.name = name;
         point.description = description;
+        point.options = [];
         W.Q.points.push(point);
     }
 }
@@ -115,18 +116,20 @@ A.Character = {
 
 //A function that creates choice groups for dialogue and other options that takes an array of choice objects with the paramaters "condition", "option" and "result". Condition is when this option is available within this choice group, option is the words of the option and result is a function that happens if this option is selected. Also takes an optional  intro which is the string that is displayed before the choices.
 
-A.MakeChoice = function(choices,intro){
+A.MakeChoice = function(choices){
     var i=0,
         ChoiceGroup = [];
     for(i=0; i<choices.length; i += 1){
     ChoiceGroup[i] = {
     condition:choices[i].condition,
     option:choices[i].option,
-    choose:choices[i].result
+    result:choices[i].result,
+    choose: function(){
+        return this.result;
+    }
     }
         }
     return {
-        intro:intro,
         choices:ChoiceGroup,
         show:function(){
         var i,
@@ -136,7 +139,7 @@ A.MakeChoice = function(choices,intro){
              output.push(this.choices[i].option);   
             }
         }
-            return {intro:intro, choices:output};
+            return {choices:output};
 }
 }
 }

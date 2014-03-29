@@ -44,18 +44,44 @@ $("#newpoint").append("<input type='submit' value='Create'></form>");
     
 $("body").on("click","#addquestion",function(){
  
-$("#questions").append("<form></form>");
-var form = $("#questions").last("form");
-form.append("<input /><button>Remove</button>");
+$("#questions").append("<form class='question'></form>");
+var form = $("#questions").find(".question");
+var last = $(form[form.length-1]);
+last.append("<input name='title'/>");
+last.append("<input name='response'/>");
+last.append("<button>Remove</button>");
 });
     
 //Submit new point form
     
 $("#forms").on("submit", "#newpoint", function( event ) {
+//Stop submit
+    
 event.preventDefault();
+    
+//Get basic information and create point in quest
+    
 var name = $("#newpoint input[name=name]").val();
 var desc = $("#newpoint textarea[name=description]").val();
 A.Quest.newpoint(name,desc);
+var point = W.Q.points[W.Q.points.length-1];
+
+//Get list of questions and results
+
+var questions = $("#newpoint").find("#questions").find("form");
+var options = [];
+var i;
+for (i=0; i<questions.length; i+=1){
+var loopquestion = $(questions[i]).serializeArray();
+var title = loopquestion[0].value;
+var response = loopquestion[1].value;
+options.push({option:title,result:response})
+}
+
+//Add list of options to point
+
+point.options.push(A.MakeChoice(options));
+
 $("#forms").html(" ");
 });
 
