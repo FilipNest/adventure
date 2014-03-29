@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+//Prevent default button action
+    
+$("body").on("click", "button", function(){
+event.preventDefault(); 
+});
+
 //Toggle new quest form
     
 $("body").on("click", "#makequest", function(){
@@ -10,7 +16,7 @@ $("#newquest").append("<label for='name'>Name</label><input name='name' /><br />
 $("#newquest").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
 $("#newquest").append("<input type='submit' value='Create'></form>");
 });
-
+    
 //Submit new quest form
     
 $("#forms").on("submit", "#newquest", function( event ) {
@@ -22,21 +28,32 @@ $("#forms").html(" ");
 $("#makepoint").show();
 });
     
+//Create a point form
+    
+$("body").on("click", "#makepoint", function(){
+$("#forms").html("<form id='newpoint'></form>");
+$("#newpoint").append("<h2>Make a new point</h2>");
+$("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />");
+$("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
+$("#newpoint").append("<button id='addquestion'>Add question</button>");
+$("#newpoint").append("<form id='questions'></form>");
+$("#newpoint").append("<input type='submit' value='Create'></form>");
+});
+    
+//Add question to point form
+    
+$("body").on("click","#addquestion",function(){
+ 
+$("#questions").append("<form></form>");
+var form = $("#questions").last("form");
+form.append("<input /><button>Remove</button>");
+});
+    
 //Submit new point form
     
 $("#forms").on("submit", "#newpoint", function( event ) {
 event.preventDefault();
 $("#forms").html(" ");
-});
-    
-//Create a point form
-    
-$("body").on("click", "#makepoint", function(){
-$("#forms").append("<form id='newpoint'></form>");
-$("#newpoint").append("<h2>Make a new point</h2>");
-$("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />");
-$("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
-$("#newpoint").append("<input type='submit' value='Create'></form>");
 });
 
 
