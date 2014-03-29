@@ -1,6 +1,7 @@
 <!doctype HTML>
 <html>
 <head>
+<link rel="stylesheet" href="style.css" />
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="engine.js"></script>
 <script src="quest.js"></script>
@@ -9,5 +10,12 @@
 <body>
 <div id="questions"></div>
 <div id="answer"></div>
+<button id="makequest">Make an adventure</button>
+<form id="newquest">
+<h2>Make an adventure!</h2>
+<label for="name">Name</label><input name="name" /><br />
+<label for="description">Description</label><textarea name="description"></textarea><br />
+<input type="submit" value="Create">
+</form>
 </body>
 </html>

@@ -1,7 +1,3 @@
-//Basic quest setup
-
-A.Quest.create("Hello","A development adventure");
-
 //Options set one
 
 W.Q.questions[0] = A.MakeChoice([
