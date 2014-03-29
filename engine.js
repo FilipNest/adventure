@@ -1,8 +1,12 @@
 //World wrapper
 
-world = {};
+W = {};
 
-Container = {
+//Engine wrapper
+
+A = {}
+
+A.Container = {
     //Shortcut function for creating a new container. Takes a name string, a size number and an array of objects [{name:name, size:size},etc]
     create: function (name, size, contents) {
         if (!contents) {
@@ -63,31 +67,21 @@ Container = {
 
 //Create a quest type
 
-Quest = {
+A.Quest = {
     name: null,
     description: null,
     questions: [],
-    character: {
-        values: {  
-            red: null,
-            orange: null,
-            yellow: null,
-            green: null,
-            blue: null,
-            indigo: null,
-            violet: null},
-        inventory: null
-    },
-    create: function(name,description,character){
-    world.quest = Object.create(this);
-    world.quest.name = name;
-    world.quest.description = description
+    create: function(name,description){
+    W.quest = Object.create(this);
+    W.quest.name = name;
+    W.quest.description = description;
+    W.quest.player = Object.create(A.Character);
     }
 }
 
 //Create a character type
 
-Character = {
+A.Character = {
     name: null,
     pos: {lat: null, lng: null, alt: null},
     //Values
@@ -98,14 +92,14 @@ Character = {
     blue: null,
     indigo: null,
     violet: null,
-    //Makes an inventory container for the character with a size of 5.
-    inventory: Container.create("inventory", 0)
+    //Makes an inventory container for the character
+    inventory: A.Container.create("inventory", 5)
 }
 
 
 //A function that creates choice groups for dialogue and other options that takes an array of choice objects with the paramaters "condition", "option" and "result". Condition is when this option is available within this choice group, option is the words of the option and result is a function that happens if this option is selected. Also takes an optional  intro which is the string that is displayed before the choices.
 
-MakeChoice = function(choices,intro){
+A.MakeChoice = function(choices,intro){
     var i=0,
         ChoiceGroup = [];
     for(i=0; i<choices.length; i += 1){

@@ -1,8 +1,10 @@
-Quest.create("Hello","A development adventure");
+//Basic quest setup
 
-//Example choice display
+A.Quest.create("Hello","A development adventure");
 
-world.quest.questions[0] = MakeChoice([
+//Options set one
+
+W.quest.questions[0] = A.MakeChoice([
     {
         condition:1<5,
         option:"Eat a sandwich",
@@ -15,28 +17,14 @@ world.quest.questions[0] = MakeChoice([
     }
 ],"What do you wish to do?");
 
-//To show this choice use
-
-world.quest.questions[0].show();
-
-//To pick answer 2 use
-
-world.quest.questions[0].choices[1].choose();
-
-
-//Create the player with some settings
-
-world.quest.player = Object.create(Character);
-world.quest.player.name = "Player";
-
 //Create a test box and some items to play with
-world.quest.box = Container.create("box", 5);
-world.quest.amulet = {name:"amulet",size:2};
-world.quest.torch = {name:"torch",size:2};
-world.quest.theremin = {name:"theremin", size:4};
+W.quest.box = A.Container.create("box", 5);
+W.quest.amulet = {name:"amulet",size:2};
+W.quest.torch = {name:"torch",size:2};
+W.quest.theremin = {name:"theremin", size:4};
 //Some examples:
-world.quest.player.inventory.receive(world.quest.amulet);
-world.quest.player.inventory.give("amulet",world.quest.box);
+W.quest.player.inventory.receive(W.quest.amulet);
+W.quest.player.inventory.give("amulet",W.quest.box);
 //The box should now have the amulet. Check this as follows.
-world.quest.box.checkitem("amulet");
+W.quest.box.checkitem("amulet");
 //Checks if the box has the amulet and returns the position of the amulet in the box's contents array.
