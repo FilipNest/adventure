@@ -83,6 +83,7 @@ A.Quest = {
         point.name = name;
         point.description = description;
         point.options = [];
+        point.level = 0;
         W.Q.points.push(point);
     }
 }
@@ -93,7 +94,11 @@ A.Point = {
     name: null,
     description: null,
     pos: {lat: null, lng: null, alt: null},
-    options: []
+    options: [],
+    level: 0,
+    show: function(){
+    return this.options[this.level].show();
+    }
 }
 
 //Create a character type
@@ -135,11 +140,9 @@ A.MakeChoice = function(choices){
         var i,
             output = [];
         for (i=0; i<this.choices.length; i+=1){
-            if(this.choices[i].condition){
-             output.push(this.choices[i].option);   
-            }
+            output.push(this.choices[i].option);
         }
-            return {choices:output};
+        return output;
 }
 }
 }
