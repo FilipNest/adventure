@@ -72,10 +72,10 @@ A.Quest = {
     description: null,
     questions: [],
     create: function(name,description){
-    W.quest = Object.create(this);
-    W.quest.name = name;
-    W.quest.description = description;
-    W.quest.player = Object.create(A.Character);
+    W.Q = Object.create(this);
+    W.Q.name = name;
+    W.Q.description = description;
+    W.Q.player = Object.create(A.Character);
     }
 }
 
