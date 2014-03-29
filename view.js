@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+//Load map
+    
+var map = L.mapbox.map('map', 'filipnest.ga46fcfi')
+    .setView([51.53333600874287, -0.1788496971130371 ], 17);
+
 //Prevent default button action
     
 $("body").on("click", "button", function(){
@@ -30,7 +35,13 @@ $("#makepoint").show();
     
 //Create a point form
     
-$("body").on("click", "#makepoint", function(){
+map.on('click', function(e) {
+if(W.Q){
+$("makeapoint").hide();
+var lat = e.latlng.lat;
+var lng = e.latlng.lng;
+var marker = L.marker([lat, lng]).addTo(map);
+
 $("#forms").html("<form id='newpoint'></form>");
 $("#newpoint").append("<h2>Make a new point</h2>");
 $("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />");
@@ -38,6 +49,7 @@ $("#newpoint").append("<label for='description'>Description</label><textarea nam
 $("#newpoint").append("<button id='addquestion'>Add question</button>");
 $("#newpoint").append("<form id='questions'></form>");
 $("#newpoint").append("<input type='submit' value='Create'></form>");
+}
 });
     
 //Add question to point form
@@ -113,7 +125,6 @@ var quest = classes[0];
 var question = classes[1];
 $("#answer").append(W.quest.questions[question].choices[selected].choose());
 $("#questions").html(" ");
-});
-    
+}); 
     
 });
