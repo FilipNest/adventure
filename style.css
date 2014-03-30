@@ -1,5 +1,8 @@
-html,body {width:100%; height:100%;}
-#forms {position:fixed; z-index:2; top:50px; left:50%; margin-left:120px; width:300px; margin:auto; background-color:white; padding:10px;}
-#makepoint {display:none;}
-#map {width:100%; height:100%; z-index:0;}
+html,body {width:100%; height:100%; margin:0px; padding:0px; font-family:arial;}
+header {width:100%; background-color:orange; padding:10px;} 
+h1 {display:inline; margin:0px; padding:0px;}
+#forms {width:300px; z-index:2; position:absolute; left:50%; margin-left:-150px; background-color:white;}
 label {display:block;}
+button.off {background-color:red;}
+button.on {background-color:green;}
+#map {width:100%; height:90%; z-index:0;}

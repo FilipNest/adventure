@@ -1,14 +1,25 @@
-$(document).ready(function(){
-
 //Load map
     
 var map = L.mapbox.map('map', 'filipnest.ga46fcfi')
     .setView([51.53333600874287, -0.1788496971130371 ], 17);
 
+$(document).ready(function(){
+
 //Prevent default button action
     
 $("body").on("click", "button", function(){
 event.preventDefault(); 
+});
+    
+//Toggle point creation
+    
+$("body").on("click", "#makepoint", function(){
+    if($("#makepoint").hasClass("on")){
+        $("#makepoint").attr("class","off");
+    }
+    else{
+    $("#makepoint").attr("class","on");
+    }
 });
 
 //Toggle new quest form
@@ -30,19 +41,31 @@ var name = $("#newquest input[name=name]").val();
 var desc = $("#newquest textarea[name=description]").val();
 A.Quest.create(name,desc);
 $("#forms").html(" ");
-$("#makepoint").show();
+//Show make point toggle
+$("header").append('<button id="makepoint">Make a point</button>');
+$("#makepoint").attr("class","off");
 });
     
 //Create a point form
     
 map.on('click', function(e) {
-if(W.Q){
-$("makeapoint").hide();
+if(W.Q && $("#makepoint").hasClass("on")){
+$("#makepoint").attr("class","off");
 var lat = e.latlng.lat;
 var lng = e.latlng.lng;
-var marker = L.marker([lat, lng]).addTo(map);
+    
+//Remove previous temporary marker if exists
+if(map.tempmarker){
+map.removeLayer(map.tempmarker);
+}
+//Add temporary map marker
+var latlng = L.latLng(lat, lng);
+map.tempmarker = L.marker(latlng);
+map.addLayer(map.tempmarker);
 
 $("#forms").html("<form id='newpoint'></form>");
+$("#newpoint").append("<input name='lat' value='"+lat+"'/>");
+$("#newpoint").append("<input name='lng' value='"+lng+"'/>");
 $("#newpoint").append("<h2>Make a new point</h2>");
 $("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />");
 $("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
@@ -72,10 +95,13 @@ $("#forms").on("submit", "#newpoint", function( event ) {
 event.preventDefault();
     
 //Get basic information and create point in quest
-    
+
 var name = $("#newpoint input[name=name]").val();
 var desc = $("#newpoint textarea[name=description]").val();
-A.Quest.newpoint(name,desc);
+var lat = $("#newpoint input[name=lat]").val();
+var lng = $("#newpoint input[name=lng]").val();
+    
+A.Quest.newpoint(name,desc,lat,lng);
 var point = W.Q.points[W.Q.points.length-1];
 
 //Get list of questions and results
@@ -95,6 +121,21 @@ options.push({option:title,result:response})
 point.options.push(A.MakeChoice(options));
 
 $("#forms").html(" ");
+    
+//Remove temporary marker
+    
+map.removeLayer(map.tempmarker);
+
+//Add real marker
+
+var latlng = L.latLng(lat, lng);
+var marker = L.marker(latlng);
+map.addLayer(marker);
+
+//Add point to marker object
+    
+marker.point = point;
+    
 });
 
 
