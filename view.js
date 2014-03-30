@@ -139,7 +139,7 @@ marker.point = point;
 //Add select event
     
 marker.on('click', function(e) {
-   
+map.panTo(e.latlng);
 console.log(this.point.name);
     
 });
