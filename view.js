@@ -56,8 +56,8 @@ $("#forms").html(" ");
 $("header").append('<button id="makepoint">Make a point</button>');
 $("#makepoint").attr("class","off");
 
-//Show map and hide intro
-    
+//Show map, hide intro and enter create mode
+A.mode = "create";    
 $("#map").show();
 $("#intro").html(" ");
 });
@@ -172,7 +172,7 @@ marker.point = point;
     
 marker.on('click', function(e) {
 map.panTo(e.latlng);
-
+if(A.mode === "create"){
 $("#forms").html("<form id='newpoint'></form>");
 $("#newpoint").append("<input name='lat' value='"+this.point.pos.lat+"'/>");
 $("#newpoint").append("<input name='lng' value='"+this.point.pos.lng+"'/>");
@@ -201,7 +201,11 @@ last.append("<button>Remove</button>");
 }
 
 $("#newpoint").append("<input type='submit' value='Edit'></form>");
-$("#newpoint").append("<button id='cancel'>Cancel</button>");    
+$("#newpoint").append("<button id='cancel'>Cancel</button>"); 
+}
+else{
+console.log(this.point.options[this.point.level].show());
+}
 });
     
 });
