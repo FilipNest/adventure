@@ -4,7 +4,16 @@ var map = L.mapbox.map('map', 'filipnest.ga46fcfi')
     .setView([51.53333600874287, -0.1788496971130371 ], 17);
 
 $(document).ready(function(){
+    
+//Hide map on load
+    
+$("#map").hide();
+    
+//Show intro
 
+$("#intro").append("<h2>Welcome to Adventure</h2>");
+$("#intro").append("<p>Create a new adventure by selecting the button below.</p>");
+    
 //Prevent default button action
     
 $("body").on("click", "button", function(){
@@ -16,6 +25,8 @@ event.preventDefault();
 $("body").on("click", "#makepoint", function(){
     if($("#makepoint").hasClass("on")){
         $("#makepoint").attr("class","off");
+        map.removeLayer(map.tempmarker);
+        $("#forms").html(" ");
     }
     else{
     $("#makepoint").attr("class","on");
@@ -44,13 +55,17 @@ $("#forms").html(" ");
 //Show make point toggle
 $("header").append('<button id="makepoint">Make a point</button>');
 $("#makepoint").attr("class","off");
+
+//Show map and hide intro
+    
+$("#map").show();
+$("#intro").html(" ");
 });
     
 //Create a point form
     
 map.on('click', function(e) {
 if(W.Q && $("#makepoint").hasClass("on")){
-$("#makepoint").attr("class","off");
 var lat = e.latlng.lat;
 var lng = e.latlng.lng;
     
