@@ -127,7 +127,6 @@ var lat = $("#newpoint input[name=lat]").val();
 var lng = $("#newpoint input[name=lng]").val();
 
 //Make a new point if none exists
-console.log(id);
 if(W.Q.points[id]){
 var point = W.Q.points[id];
 point.name = name;
@@ -151,7 +150,7 @@ options.push({option:title,result:response})
 
 //Add list of options to point
 
-point.options.push(A.MakeChoice(options));
+point.options[0] = A.MakeChoice(options);
 
 $("#forms").html(" ");
     
@@ -173,6 +172,7 @@ marker.point = point;
     
 marker.on('click', function(e) {
 map.panTo(e.latlng);
+
 $("#forms").html("<form id='newpoint'></form>");
 $("#newpoint").append("<input name='lat' value='"+this.point.pos.lat+"'/>");
 $("#newpoint").append("<input name='lng' value='"+this.point.pos.lng+"'/>");
@@ -180,8 +180,26 @@ $("#newpoint").append("<input name='id' value='"+this.point.id+"'/>");
 $("#newpoint").append("<h2>Edit quest point</h2>");
 $("#newpoint").append("<label for='name'>Name</label><input name='name' value='"+this.point.name+"' /><br />");
 $("#newpoint").append("<label for='description'>Description</label><textarea name='description'>"+this.point.description+"</textarea><br />");
-$("#newpoint").append("<button id='addquestion'>Add question</button>");
+$("#newpoint").append("<button id='addquestion'>Add option</button>");
 $("#newpoint").append("<form id='questions'></form>");
+
+//Get options
+    
+var choices = this.point.options[this.point.level].choices;
+var i;
+for(i=0; i<choices.length; i+=1){
+var choice = choices[i];
+var option = choice.option;
+var result = choice.result;
+$("#questions").append("<form class='question'></form>");
+var form = $("#questions").find(".question");
+var last = $(form[form.length-1]);
+last.append("<input name='title' value='"+option+"'/>");
+last.append("<input name='result' value='"+result+"'/>");
+last.append("<button>Remove</button>");
+
+}
+
 $("#newpoint").append("<input type='submit' value='Edit'></form>");
 $("#newpoint").append("<button id='cancel'>Cancel</button>");    
 });
