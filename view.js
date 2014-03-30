@@ -135,9 +135,17 @@ map.addLayer(marker);
 //Add point to marker object
     
 marker.point = point;
+
+//Add select event
+    
+marker.on('click', function(e) {
+   
+console.log(this.point.name);
     
 });
-
+    
+});
+    
 
 // Show question list
 
