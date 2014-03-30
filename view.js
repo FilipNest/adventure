@@ -81,6 +81,7 @@ map.addLayer(map.tempmarker);
 $("#forms").html("<form id='newpoint'></form>");
 $("#newpoint").append("<input name='lat' value='"+lat+"'/>");
 $("#newpoint").append("<input name='lng' value='"+lng+"'/>");
+$("#newpoint").append("<input name='id' value='"+W.Q.points.length+"'/>");
 $("#newpoint").append("<h2>Make a new point</h2>");
 $("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />");
 $("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
@@ -112,20 +113,30 @@ last.append("<button>Remove</button>");
 //Submit new point form
     
 $("#forms").on("submit", "#newpoint", function( event ) {
+
 //Stop submit
     
 event.preventDefault();
     
 //Get basic information and create point in quest
 
+var id = $("#newpoint input[name=id]").val();
 var name = $("#newpoint input[name=name]").val();
 var desc = $("#newpoint textarea[name=description]").val();
 var lat = $("#newpoint input[name=lat]").val();
 var lng = $("#newpoint input[name=lng]").val();
-    
-A.Quest.newpoint(name,desc,lat,lng);
-var point = W.Q.points[W.Q.points.length-1];
 
+//Make a new point if none exists
+console.log(id);
+if(W.Q.points[id]){
+var point = W.Q.points[id];
+point.name = name;
+point.description = desc;
+}
+else{
+A.Quest.newpoint(id,name,desc,lat,lng);
+var point = W.Q.points[W.Q.points.length-1];
+}
 //Get list of questions and results
 
 var questions = $("#newpoint").find("#questions").find("form");
@@ -162,7 +173,17 @@ marker.point = point;
     
 marker.on('click', function(e) {
 map.panTo(e.latlng);
-console.log(this.point.name);
+$("#forms").html("<form id='newpoint'></form>");
+$("#newpoint").append("<input name='lat' value='"+this.point.pos.lat+"'/>");
+$("#newpoint").append("<input name='lng' value='"+this.point.pos.lng+"'/>");
+$("#newpoint").append("<input name='id' value='"+this.point.id+"'/>");
+$("#newpoint").append("<h2>Edit quest point</h2>");
+$("#newpoint").append("<label for='name'>Name</label><input name='name' value='"+this.point.name+"' /><br />");
+$("#newpoint").append("<label for='description'>Description</label><textarea name='description'>"+this.point.description+"</textarea><br />");
+$("#newpoint").append("<button id='addquestion'>Add question</button>");
+$("#newpoint").append("<form id='questions'></form>");
+$("#newpoint").append("<button id='cancel'>Cancel</button>");
+$("#newpoint").append("<input type='submit' value='Create'></form>");
     
 });
     

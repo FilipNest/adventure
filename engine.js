@@ -78,8 +78,9 @@ A.Quest = {
         W.Q.player = Object.create(A.Character);
         W.Q.points = [];
         },
-    newpoint: function(name,description,lat,lng,options){
+    newpoint: function(id,name,description,lat,lng){
         var point = Object.create(A.Point);
+        point.id = id;
         point.name = name;
         point.description = description;
         point.pos = {lat:lat,lng:lng};
@@ -96,6 +97,7 @@ A.Point = {
     description: null,
     pos: {lat: null, lng: null, alt: null},
     options: [],
+    id:null,
     level: 0,
     show: function(){
     return this.options[this.level].show();
