@@ -32,6 +32,20 @@ $("body").on("click", "#makepoint", function(){
     $("#makepoint").attr("class","on");
     }
 });
+    
+$("body").on("click", "#mode", function(){
+    if($("#mode").hasClass("create")){
+        $("#mode").attr("class","play");
+        A.mode = "play";
+        $("#mode").text("Toggle create mode");
+        $("#forms").html(" ");
+    }
+    else{
+    $("#mode").attr("class","create");
+    $("#mode").text("Toggle play mode");
+    A.mode = "create";
+    }
+});
 
 //Toggle new quest form
     
@@ -55,6 +69,9 @@ $("#forms").html(" ");
 //Show make point toggle
 $("header").append('<button id="makepoint">Make a point</button>');
 $("#makepoint").attr("class","off");
+$("header").append('<button id="mode">Switch to play mode</button>');
+$("#mode").attr("class","create");
+
 
 //Show map, hide intro and enter create mode
 A.mode = "create";    
@@ -65,7 +82,7 @@ $("#intro").html(" ");
 //Create a point form
     
 map.on('click', function(e) {
-if(W.Q && $("#makepoint").hasClass("on")){
+if(A.mode === "create" && $("#makepoint").hasClass("on")){
 var lat = e.latlng.lat;
 var lng = e.latlng.lng;
     
@@ -106,7 +123,7 @@ $("#questions").append("<form class='question'></form>");
 var form = $("#questions").find(".question");
 var last = $(form[form.length-1]);
 last.append("<input name='title'/>");
-last.append("<input name='response'/>");
+last.append("<textarea name='response'></textarea>");
 last.append("<button>Remove</button>");
 });
     
@@ -195,7 +212,7 @@ $("#questions").append("<form class='question'></form>");
 var form = $("#questions").find(".question");
 var last = $(form[form.length-1]);
 last.append("<input name='title' value='"+option+"'/>");
-last.append("<input name='result' value='"+result+"'/>");
+last.append("<textarea name='result'>"+result+"</textarea>");
 last.append("<button>Remove</button>");
 
 }
