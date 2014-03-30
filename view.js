@@ -87,8 +87,8 @@ $("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />
 $("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
 $("#newpoint").append("<button id='addquestion'>Add question</button>");
 $("#newpoint").append("<form id='questions'></form>");
-$("#newpoint").append("<button id='cancel'>Cancel</button>");
 $("#newpoint").append("<input type='submit' value='Create'></form>");
+$("#newpoint").append("<button id='cancel'>Cancel</button>");
 }
 });
    
@@ -182,9 +182,8 @@ $("#newpoint").append("<label for='name'>Name</label><input name='name' value='"
 $("#newpoint").append("<label for='description'>Description</label><textarea name='description'>"+this.point.description+"</textarea><br />");
 $("#newpoint").append("<button id='addquestion'>Add question</button>");
 $("#newpoint").append("<form id='questions'></form>");
-$("#newpoint").append("<button id='cancel'>Cancel</button>");
-$("#newpoint").append("<input type='submit' value='Create'></form>");
-    
+$("#newpoint").append("<input type='submit' value='Edit'></form>");
+$("#newpoint").append("<button id='cancel'>Cancel</button>");    
 });
     
 });
