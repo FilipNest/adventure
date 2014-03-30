@@ -71,8 +71,15 @@ $("#newpoint").append("<label for='name'>Name</label><input name='name' /><br />
 $("#newpoint").append("<label for='description'>Description</label><textarea name='description'></textarea><br />");
 $("#newpoint").append("<button id='addquestion'>Add question</button>");
 $("#newpoint").append("<form id='questions'></form>");
+$("#newpoint").append("<button id='cancel'>Cancel</button>");
 $("#newpoint").append("<input type='submit' value='Create'></form>");
 }
+});
+   
+//Cancel button
+$("body").on("click","#cancel",function(){
+map.removeLayer(map.tempmarker);
+$("#forms").html(" ");
 });
     
 //Add question to point form
