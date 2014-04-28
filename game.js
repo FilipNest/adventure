@@ -1,10 +1,12 @@
 /*global A,console*/
 
 //Create a basic world. Player has ten health and a size 10 rucksack with nothing in it to start.
-var world = Object.create(A.world);
-world.attributes.red = "health";
-world.player.attributes.red = 10;
-world.player.attributes.blue = 6;
+var world = A.world.create({title: "Hello, world", description: "An adventure in testing"});
+
+world.player.attributes.red.name = "health";
+world.player.attributes.blue.name = "water";
+world.player.attributes.red.value = 10;
+world.player.attributes.blue.value = 6;
 world.player.inventory = Object.create(A.container);
 world.player.inventory.name = "rucksack";
 world.player.inventory.size = 5;
@@ -34,34 +36,36 @@ world.findplace("Start").container = Object.create(A.container, {
 
 //Create an amulet object
 
-world.amulet = Object.create(A.item);
-world.amulet.name = "Amulet";
-world.amulet.size = 5;
+world.items.push(Object.create(A.item));
+world.items[0].admin_name = "Amulet";
+world.finditem("Amulet").name = "Amulet";
+world.finditem("Amulet").size = 5;
 
 //Create a donkey object
 
-world.donkey = Object.create(A.item);
-world.donkey.name = "Donkey";
-world.donkey.size = 100;
+world.items.push(Object.create(A.item));
+world.items[1].admin_name = "Donkey";
+world.finditem("Donkey").name = "Donkey";
+world.finditem("Donkey").size = 100;
 
 //Put the amulet in the treasure chest
 
-world.findplace("Start").container.receive(world.amulet);
+world.findplace("Start").container.receive(world.items[0]);
 
 //Give the player the amulet
 
-world.findplace("Start").container.give(world.amulet, world.player.inventory);
+world.findplace("Start").container.give(world.items[0], world.player.inventory);
 
 //Check if the player has the amulet
 
-console.log(world.player.inventory.checkitem(world.amulet));
+console.log(world.player.inventory.checkitem(world.items[0]));
 
 //Create a game condition for checking if the player has 10 health
 
 world.condition = Object.create(A.condition, {attributes : {value: {min : {}, max : {}}}});
 world.condition.attributes.red = {min : 9};
 world.condition.attributes.blue = {max : 10};
-world.condition.item = {yes : world.amulet, no : world.donkey};
+world.condition.item = {yes : world.items[0], no : world.items[1]};
 
 //Test if condition passes
 

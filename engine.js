@@ -1,3 +1,5 @@
+/*global console*/
+
 var A;
 (function () {
     'use strict';
@@ -8,17 +10,35 @@ var A;
             //World object for putting everything in
 
             world: {
-                description: null,
-                attributes: {
-                    red: null,
-                    orange: null,
-                    yellow: null,
-                    green: null,
-                    blue: null,
-                    indigo: null,
-                    violet: null
+
+                //Method for creating a new world with validation
+                create: function (plan) {
+                    
+                    var world = Object.create(this);
+                    
+                    if (!plan) {
+                        console.error("no plan");
+                        return false;
+                    }
+                
+                    if (plan.title) {
+                
+                        world.title = plan.title;
+                        
+                    } else {console.error("no title"); return false; }
+                    
+                    if (plan.description) {
+                
+                        world.description = plan.description;
+                        
+                    } else {console.error("no description"); return false; }
+                    world.places = [];
+                    world.items = [];
+                    world.player = A.player.create();
+                    return world;
                 },
-                places: [],
+                
+                //Method for finding a place within the world
                 findplace: function (name) {
                     var i;
                     for (i = 0; i < this.places.length; i += 1) {
@@ -28,19 +48,37 @@ var A;
                     }
                     return false;
                 },
-                items: [],
-                player: {
-                    name: null,
-                    attributes: {
-                        red: null,
-                        orange: null,
-                        yellow: null,
-                        green: null,
-                        blue: null,
-                        indigo: null,
-                        violet: null
-                    },
-                    inventory: null
+                //Method for finding a place within the world
+                finditem: function (name) {
+                    var i;
+                    for (i = 0; i < this.items.length; i += 1) {
+                        if (this.items[i].admin_name === name) {
+                            return this.items[i];
+                        }
+                    }
+                    return false;
+                }
+            },
+        
+            //Player
+            player: {
+                create: function () {
+                 
+                    var player = Object.create(this);
+                    player.name = "";
+                    player.attributes = {
+                        red: {name: null, value: null},
+                        orange: {name: null, value: null},
+                        yellow: {name: null, value: null},
+                        green: {name: null, value: null},
+                        blue: {name: null, value: null},
+                        indigo: {name: null, value: null},
+                        violet: {name: null, value: null}
+                    };
+                    player.inventory = {};
+                    //Attributes keep their property names (name, value)
+                    Object.freeze(player.attributes);
+                    return player;
                 }
             },
 
@@ -107,6 +145,7 @@ var A;
             //Items for putting in containers.
 
             item: {
+                admin_name : null,
                 name: null,
                 size: null,
                 //Stuck to account
@@ -184,7 +223,25 @@ var A;
                     
                     return true;
                 }
-            }
+            },
+            outcome:
+                {
+                    item : null,
+                    attributes : null,
+                    setchange : null,
+                    message : null,
+                    trigger: function (player, place) {
+                    
+                        if (this.item !== null) {
+                        
+                            player.inventory.receive(this.item.give);
+                            player.inventory.give(this.item.take, place.container);
+                        
+                        }
+                        
+                        
+                    }
+                }
         };
     A = adventure;
 }
