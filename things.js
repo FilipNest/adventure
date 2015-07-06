@@ -94,7 +94,7 @@ A.thing = function (name, type, hidden, value) {
     flipHidden: function () {
 
       self.hidden = !self.hidden;
-      
+
       return self.hidden;
 
     },
@@ -103,12 +103,18 @@ A.thing = function (name, type, hidden, value) {
 
       return self.hidden;
 
-    }
+    },
+
+    getType: function () {
+
+      return self.type;
+
+    };
 
   }
-  
+
   A.things[name] = public;
-  
+
   return public;
 
 };
