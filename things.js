@@ -40,9 +40,9 @@ A.thing = function (name, type, hidden, value) {
 
   //Check if thing doesn't already exist in the world
 
-  if (A.things[name]) {
+  if (A.things[name.toLowerCase()]) {
 
-    throw Error("There is already a thing called " + name);
+    throw Error("There is already a thing called " + name + ". Thing names are case insensitive");
 
   }
 
@@ -109,11 +109,17 @@ A.thing = function (name, type, hidden, value) {
 
       return self.type;
 
-    };
+    },
+
+    getName: function () {
+
+      return self.name;
+
+    }
 
   }
 
-  A.things[name] = public;
+  A.things[name.toLowerCase()] = public;
 
   return public;
 
