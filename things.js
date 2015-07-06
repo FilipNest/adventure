@@ -1,5 +1,3 @@
-var A = {};
-
 //Holder for all things
 
 A.things = {};
