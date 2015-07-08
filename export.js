@@ -1,1 +1,0 @@
-//Placeholder for adventure export function(s)
