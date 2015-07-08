@@ -1,6 +1,12 @@
 //Placeholder for action defining function(s).
 
-A.action = function (subject, value) {
+A.action = function (subject, value, message) {
+
+  if (typeof message !== "string") {
+
+    throw Error("Message must be text");
+
+  }
 
   var subject = subject.toLowerCase();
 
@@ -16,9 +22,15 @@ A.action = function (subject, value) {
 
   }
 
+  this.message = message;
+
+  self = this;
+
   return function () {
 
     A.things[subject].setValue(value);
+
+    return self.message;
 
   };
 

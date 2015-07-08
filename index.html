@@ -10,30 +10,34 @@
 </head>
 
 <body>
-  
+
   <script src="requirements.js"></script>
   <script src="things.js"></script>
   <script src="choices.js"></script>
   <script src="actions.js"></script>
-  
+
   <script>
     //Test script
 
-    new A.thing("Name", "number", false, 23);
+    new A.thing("Name", "number", false, 100);
 
     var test = new A.requirement("name", ">", 55);
-    
+
     var test2 = new A.requirement("name", "<", 5000);
 
-    var chain = [[test,test2]];
-    
-    console.log(A.requirementsCheck(chain));
+    var chain = [
+      [test, test2]
+    ];
 
-    var action = new A.action("name", 4999);
+    console.log(A.things["name"].getValue());
 
-    action();
+    var action = new A.action("name", 50000, "You increased your name");
 
-    console.log(A.requirementsCheck(chain));
+    var choice = new A.choice("This is a choice", chain, action);
+
+    console.log(choice.trigger());
+
+    console.log(A.things["name"].getValue());
 
   </script>
 
