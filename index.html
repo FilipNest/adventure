@@ -10,12 +10,12 @@
 </head>
 
 <body>
-
-  <script src="things.js"></script>
+  
   <script src="requirements.js"></script>
+  <script src="things.js"></script>
+  <script src="choices.js"></script>
   <script src="actions.js"></script>
-
-
+  
   <script>
     //Test script
 
@@ -23,13 +23,17 @@
 
     var test = new A.requirement("name", ">", 55);
     
-    console.log(test());
+    var test2 = new A.requirement("name", "<", 5000);
+
+    var chain = [[test,test2]];
     
-    var action = new A.action("name", 5000);
-    
+    console.log(A.requirementsCheck(chain));
+
+    var action = new A.action("name", 4999);
+
     action();
 
-    console.log(test());
+    console.log(A.requirementsCheck(chain));
 
   </script>
 
