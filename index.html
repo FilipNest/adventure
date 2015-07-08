@@ -1,45 +1,40 @@
 <!doctype HTML>
-<html>
+<html ng-app="adventure">
 
 <head>
   <title>Adventure</title>
   <script>
     var A = {};
 
-  </script>
-</head>
+    A.mode = "create";
 
-<body>
+  </script>
 
   <script src="requirements.js"></script>
   <script src="things.js"></script>
   <script src="choices.js"></script>
   <script src="actions.js"></script>
 
-  <script>
-    //Test script
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
 
-    new A.thing("Name", "number", false, 100);
+  <script src="front.js"></script>
 
-    var test = new A.requirement("name", ">", 55);
+  <script src="test.js"></script>
 
-    var test2 = new A.requirement("name", "<", 5000);
+</head>
 
-    var chain = [
-      [test, test2]
-    ];
+<body>
 
-    console.log(A.things["name"].getValue());
+  <section ng-controller="things">
 
-    var action = new A.action("name", 50000, "You increased your name");
+    <h1>Things</h1>
 
-    var choice = new A.choice("This is a choice", chain, action);
+    <ul>List of things</ul>
 
-    console.log(choice.trigger());
+    <li ng-repeat="(name, thing) in list">{{name}}</li>
 
-    console.log(A.things["name"].getValue());
-
-  </script>
+  </section>
 
 </body>
 

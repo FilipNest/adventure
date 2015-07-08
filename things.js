@@ -4,6 +4,8 @@ A.things = {};
 
 A.thing = function (name, type, hidden, value) {
 
+  var name = name.toLowerCase();
+
   //Create object
 
   if (typeof name !== "string") {
@@ -38,7 +40,7 @@ A.thing = function (name, type, hidden, value) {
 
   //Check if thing doesn't already exist in the world
 
-  if (A.things[name.toLowerCase()]) {
+  if (A.things[name]) {
 
     throw Error("There is already a thing called " + name + ". Thing names are case insensitive");
 
@@ -113,11 +115,29 @@ A.thing = function (name, type, hidden, value) {
 
       return self.name;
 
+    },
+
+    remove: function () {
+
+      if (A.mode === "create") {
+
+        delete A.things[self.name];
+
+        $(document).trigger("thingChanged", public);
+
+      } else {
+
+        throw Error("Can't delete things outside of create mode");
+
+      }
+
     }
 
   }
 
-  A.things[name.toLowerCase()] = public;
+  A.things[name] = public;
+
+  $(document).trigger("thingChanged", public);
 
   return public;
 
