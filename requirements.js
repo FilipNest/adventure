@@ -69,7 +69,7 @@ A.requirement = function (subject, operator, value) {
 
   var public = function () {
 
-    var currentValue = A.things[self.subject].getValue(),
+    var currentValue = A.things[self.subject].value,
       result;
 
     switch (operator) {

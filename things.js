@@ -62,6 +62,7 @@ A.thing = function (name, type, hidden, value) {
       if (self.type === typeof value) {
 
         self.value = value;
+        $(document).trigger("thingChanged", public);
 
       } else {
 
@@ -71,7 +72,7 @@ A.thing = function (name, type, hidden, value) {
 
     },
 
-    getValue: function () {
+    get value() {
 
       return self.value;
 

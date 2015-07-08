@@ -10,6 +10,11 @@
 
   var action = new A.action("Fun", 50000, "You increased your fun");
 
+  var action2 = new A.action("Fun", 30000, "You increased your fun");
+
+
   var choice = new A.choice("This is a choice", chain, action);
 
-  console.log(choice.trigger());
+  var choice2 = new A.choice("This is a choice", chain, action);
+
+//choice.trigger();
