@@ -42,8 +42,12 @@ A.requirement = function (subject, operator, value) {
 
     switch (operator) {
 
+
       case "<":
         result = (currentValue < self.value);
+        break;
+      case ">":
+        result = (currentValue > self.value);
         break;
       default:
         result = false;

@@ -10,20 +10,29 @@
 </head>
 
 <body>
-  
+
   <script src="things.js"></script>
   <script src="requirements.js"></script>
+  <script src="actions.js"></script>
+
 
   <script>
-    
     //Test script
 
     new A.thing("Name", "number", false, 23);
-   
-    var test = new A.requirement("name","<",55);
+
+    var test = new A.requirement("name", ">", 55);
+    
+    console.log(test());
+    
+    var action = new A.action("name", 5000);
+    
+    action();
+
+    console.log(test());
 
   </script>
-  
+
 </body>
 
 </html>
