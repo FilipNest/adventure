@@ -18,6 +18,20 @@ function adventure_core_menu() {
 }
 
 
+  /**
+   * Implements hook_theme().
+   */
+    function adventure_core_theme($existing, $type, $theme, $path) {
+      $theme = array();
+      $theme['node__adventure'] = array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--adventure',
+        'path' => drupal_get_path('module', 'adventure_core') . '/templates',
+       );
+      return $theme;
+    }
+
 
 function adventure_core_output($path, $gameid = null) {
       
@@ -124,7 +138,7 @@ function adventure_core_output($path, $gameid = null) {
     
     }
   
-    $return['choices'] = $choices;
+    $output['choices'] = $choices;
     
     $return[] = $output;
     

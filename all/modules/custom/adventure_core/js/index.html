@@ -1,0 +1,81 @@
+<!doctype HTML>
+<html ng-app="adventure">
+
+<head>
+  <title>Adventure</title>
+  <script>
+    var A = {};
+
+    A.mode = "create";
+
+  </script>
+
+  <script src="requirements.js"></script>
+  <script src="things.js"></script>
+  <script src="choices.js"></script>
+  <script src="actions.js"></script>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
+
+  <script src="front.js"></script>
+
+  <script src="test.js"></script>
+
+</head>
+
+<body>
+
+  <section ng-controller="things">
+
+    <h1>Things</h1>
+
+    <ul>List of things</ul>
+
+    <li ng-repeat="(name, thing) in list">{{name}} - {{thing.value}}</li>
+
+  </section>
+
+  <section ng-controller="form">
+
+    <h1>Make something</h1>
+
+    <label>What is it called?</label>
+    <input />
+    <label>Where will it start?</label>
+    <input />
+    <label>Some initial text</label>
+    <input />
+    <label>Some initial number</label>
+    <input />
+    <label>When will this be visible?</label>
+    <fieldset>
+      <label>Object</label>
+      <select></select>
+      <labeL>Operator</labeL>
+      <select></select>
+      <label>Value</label>
+      <select></select>
+    </fieldset>
+    <fieldset>
+      <label>Text of choice</label>
+      <input />
+      <label>When will this be visible?</label>
+      <fieldset>
+        <label>Object</label>
+        <select></select>
+        <labeL>Operator</labeL>
+        <select></select>
+        <label>Value</label>
+        <select></select>
+      </fieldset>
+      <fieldset>
+      <label>Object</label><input />
+      <label>Value</label>
+      </fieldset>
+    </fieldset>
+  </section>
+
+</body>
+
+</html>
