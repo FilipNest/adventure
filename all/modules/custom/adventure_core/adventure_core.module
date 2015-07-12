@@ -1,0 +1,245 @@
+<?php
+/**
+ * @file
+ * Code for the Adventure core feature.
+ */
+
+include_once 'adventure_core.features.inc';
+
+
+function adventure_core_menu() {
+    $items['fetch/game'] = array(
+        'access callback'   => true, // available to all
+        'page callback'     => 'adventure_core_output', // defined below
+        'delivery callback' => 'drupal_json_output',
+        'page arguments' => array(1),
+    );
+    return $items;
+}
+
+
+
+function adventure_core_output($path, $gameid = null) {
+      
+  if(!$gameid){
+    
+    return false;
+    
+  }
+    
+  $output = "";
+  
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+  ->entityCondition('bundle', 'thing')
+  ->propertyCondition('status', 1) // published? yes
+  ->fieldCondition('field_adventure_reference', 'target_id', $gameid)
+  ->range(0, 10); //do not forget the semicolon at the end of the query conditions
+  $result = $query->execute();
+
+  
+  if (isset($result['node'])) {
+    $thing_nids = array_keys($result['node']);
+    $things = entity_load('node', $thing_nids);
+  } else {
+   
+    return false;
+    
+  }
+  
+  //Holding array for all things to be returned.
+  
+  $return = array();
+    
+  foreach($things as $thing){
+    
+    $output = array();
+    
+    $output['name'] = $thing->title;
+    $output['description'] = $thing->field_thing_description['und'][0]['value'];
+    $output['value'] = $thing->field_thing_value['und'][0]['value'];
+    
+    //Get viewing requirements
+    
+    //Holding array
+    
+    $viewing_requirements = convert_requirements($thing->field_requirements);
+        
+    //Get every nested requirement array and loop over it to get the or statements
+        
+    $output['viewing_requirements'] = $viewing_requirements;
+    
+    //On to choices
+    
+    $choices = array();
+            
+    foreach($thing->field_choice['und'] as $key => $choice){
+   
+      $id = $choice['value'];
+      
+     $loaded_choice = entity_load('field_collection_item', array($id));
+            
+      $loaded_choice = $loaded_choice[$id];
+      
+      $choice = array();
+                  
+      $choice['text'] = $loaded_choice->field_choice_name['und'][0]['value'];
+      
+      $choice['message'] = $loaded_choice->field_action_message['und'][0]['value'];
+      
+      $choice['requirements'] = convert_requirements($loaded_choice->field_requirements);
+      
+      //Loop over actions
+      
+      $actions = array();
+      
+      foreach ($loaded_choice->field_action['und'] as $key => $action){
+      
+        $id = $action['value'];
+        
+        $loaded_action = entity_load('field_collection_item', array($id));
+        
+        $loaded_action = $loaded_action[$id];
+        
+        $value_change_id = $loaded_action->field_thing_value_change['und'][0]['value'];
+        
+        $value_change = entity_load('field_collection_item', array($value_change_id));
+        
+        $value_change = $value_change[$value_change_id];
+                
+        $action = array(
+        
+          "target" => $value_change->field_thing_reference['und'][0]['target_id'],
+          "value" => $value_change->field_thing_value['und'][0]['value']
+          
+        );
+          
+        $actions[] = $action;
+        
+      }
+      
+      $choice['actions'] = $actions;
+      
+      $choices[] = $choice; 
+    
+    }
+  
+    $return['choices'] = $choices;
+    
+    $return[] = $output;
+    
+  }
+  
+  return $return;
+  
+}
+
+
+function convert_requirements($array){
+  
+  $complete_requirements = array();
+  
+  $field_requirements = $array['und'];
+  
+  $requirement_groups = array();
+  
+    foreach($field_requirements as $key => $requirement_group){
+            
+      $requirement_groups[] = $requirement_group['value'];
+      
+    }
+      
+    foreach($requirement_groups as $key => $id){
+            
+      $requirement_group = entity_load('field_collection_item', array($id));
+      
+      //Loop over all requirements inside requirement group
+      $requirement_collection = $requirement_group[$id];
+      
+      $requirement_group = array();
+      
+      foreach($requirement_collection->field_requirement['und'] as $requirement){
+        
+        $id = $requirement['value'];
+        
+        //Load actual requirement
+        
+        $requirement = entity_load('field_collection_item', array($id));
+                
+        $requirement = $requirement[$id];
+                
+        $requirement = array(
+          
+          "thing" => $requirement->field_thing_reference['und'][0]['target_id'],
+          "operator" => $requirement->field_comparison_operator['und'][0]['value'],
+          "value" => $requirement->field_thing_value['und'][0]['value'],
+          "negate" => $requirement->field_negate['und'][0]['value'],
+          
+          );
+        
+        $requirement_group[] = $requirement;
+        
+        
+      
+      }
+      
+      $complete_requirements[] = $requirement_group;
+    
+    }
+  
+  return $complete_requirements;
+  
+};
+
+
+/**
+ * Implements hook_field_collection_is_empty_alter().
+ *
+ * If at least one collection field is not empty (but not default), field collection is not empty.
+ *
+ * @param $is_empty
+ * @param $item
+ */
+function adventure_core_field_collection_is_empty_alter(&$is_empty, $item) {
+  if (! $is_empty) {
+    $is_empty = TRUE;
+    $instances = field_info_instances('field_collection_item', $item->field_name);
+
+    foreach ($instances as $instance) {
+      $field_name = $instance['field_name'];
+      $field = field_info_field($field_name);
+
+      // Determine the list of languages to iterate on.
+      $languages = field_available_languages('field_collection_item', $field);
+
+      foreach ($languages as $langcode) {
+        if (!empty($item->{$field_name}[$langcode])) {
+          
+          // If field value is default value, assume empty
+          if (_adventure_core_field_collection_item_field_is_default($item->{$field_name}[$langcode], $instance)) continue;
+
+          // If at least one collection-field is not empty; the
+          // field collection item is not empty.
+          foreach ($item->{$field_name}[$langcode] as $delta => $field_item) {
+            if (!module_invoke($field['module'], 'field_is_empty', $field_item, $field)) {
+              $is_empty = FALSE;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Evaluate if field item is set to default value.
+ *
+ * @param $item
+ * @param $instance
+ *
+ * @return bool
+ */
+function _adventure_core_field_collection_item_field_is_default($item, $instance) {
+  return (isset($instance['default_value']) && $instance['default_value'] == $item);
+}
+?>
