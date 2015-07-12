@@ -69,6 +69,7 @@ function adventure_core_output($path, $gameid = null) {
     
     $output = array();
     
+    $output['id'] = $thing->nid;
     $output['name'] = $thing->title;
     $output['description'] = $thing->field_thing_description['und'][0]['value'];
     $output['value'] = $thing->field_thing_value['und'][0]['value'];

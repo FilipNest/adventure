@@ -20,3 +20,5 @@ $options = array(
   $result = $result->data;
 
 drupal_add_js('A.data ='.$result.';', array('type' => 'inline'));
+
+drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/front.js");

@@ -1,31 +1,20 @@
-var app = angular.module("adventure", []);
+ (function ($) {
 
-//Main controller
-app.controller("things", ["$scope", things])
+   $.each(A.data, function(index, element){
 
+     new A.thing(element.id, element.name,element.description, element.value, element.viewing_requirements);
+  
+//  var action = new A.action("Fun", 50000, "You increased your fun");
+//
+//  var action2 = new A.action("Fun", 30000, "You increased your fun");
+//
+//
+//  var choice = new A.choice("This is a choice", chain, action);
+//
+//  var choice2 = new A.choice("This is a choice", chain, action);
+//
+////choice.trigger();
+     
+   });
 
-function things($scope) {
-
-  $scope.list = A.things;
-
-  $(document).on("thingChanged", function (thing) {
-
-    $scope.list = A.things;
-    $scope.$apply();
-
-  });
-
-};
-
-
-//Treat objects like arrays
-
-app.filter("toArray", function () {
-  return function (obj) {
-    var result = [];
-    angular.forEach(obj, function (val, key) {
-      result.push(val);
-    });
-    return result;
-  };
-})
+ })(jQuery)
