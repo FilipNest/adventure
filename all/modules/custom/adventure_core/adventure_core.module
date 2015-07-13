@@ -102,6 +102,8 @@ function adventure_core_output($path, $gameid = null) {
       
       $choice['message'] = $loaded_choice->field_action_message['und'][0]['value'];
       
+      $choice['id'] = $id;
+      
       $choice['requirements'] = convert_requirements($loaded_choice->field_requirements);
       
       //Loop over actions

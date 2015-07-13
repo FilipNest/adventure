@@ -1,14 +1,10 @@
-A.choice = function (text, requirements, action) {
-
-  if (typeof text !== "string") {
-
-    throw Error("Text must be a string");
-
-  }
+A.choice = function (text, requirements, actions, id, message) {
 
   this.requirements = requirements;
-  this.action = action;
+  this.actions = actions;
+  this.id = id;
   this.text = text;
+  this.message = message;
 
   var self = this;
 
@@ -19,12 +15,30 @@ A.choice = function (text, requirements, action) {
       return A.requirementsCheck(self.requirements);
 
     },
+    
+    get text(){
+     
+      return self.text;
+      
+    },
+    
+    get id(){
+     
+      return self.id;
+      
+    },
 
     trigger: function () {
 
       if (A.requirementsCheck(self.requirements)) {
 
-        return self.action();
+        self.actions.forEach(function(element, index){
+                    
+          element();
+          
+        });
+        
+        return self.message;
 
       } else {
 

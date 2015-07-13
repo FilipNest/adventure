@@ -2,7 +2,7 @@
 
    $.each(A.data, function(index, element){
 
-     new A.thing(element.id, element.name,element.description, element.value, element.viewing_requirements);
+     new A.thing(element.id, element.name,element.description, element.value, element.viewing_requirements, element.choices);
        
    });
    

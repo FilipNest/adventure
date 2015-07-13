@@ -2,7 +2,7 @@
 
 A.things = {};
 
-A.thing = function (id, name, description, value, requirements) {
+A.thing = function (id, name, description, value, requirements, choices) {
 
   var name = name.toLowerCase();
 
@@ -26,6 +26,44 @@ A.thing = function (id, name, description, value, requirements) {
     requirements_array.push(or);
     
   });
+  
+  var choices_array = [];
+  
+  choices.forEach(function(choice){
+    
+    var actions = [];
+    
+    //Create actions array
+    
+    choice.actions.forEach(function(action){
+      
+      actions.push(new A.action(action.target, action.value));
+      
+    });
+    
+    var requirements_array = [];
+
+    choice.requirements.forEach(function(group, index){
+
+      var or = [];
+
+      group.forEach(function(requirement, index){
+
+          or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))  
+
+      });
+
+      requirements_array.push(or);
+
+    });
+    
+    var choice = new A.choice(choice.text, requirements_array, actions, choice.id, choice.message);
+    
+    choices_array.push(choice);
+      
+  });
+  
+  this.choices = choices_array;
   
   this.requirements = requirements_array;
   
@@ -56,6 +94,28 @@ A.thing = function (id, name, description, value, requirements) {
      
       return A.requirementsCheck(self.requirements);
       
+    },
+    
+    listChoices: function(){
+    
+     //List only visible choices
+      
+      var output = [];
+      
+      self.choices.forEach(function(element){
+                
+        if(element.checkVisibility()){
+                    
+          output.push({id:element.id, text:element.text, trigger:element.trigger});
+          
+        };
+        
+      });
+      
+      if(output.length > 0){
+      return output; 
+      }
+    
     }
 
   }
