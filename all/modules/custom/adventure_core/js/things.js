@@ -10,63 +10,63 @@ A.thing = function (id, name, description, value, requirements, choices) {
   this.name = name;
   this.description = description;
   this.value = value;
-  
+
   var requirements_array = [];
-  
-  requirements.forEach(function(group, index){
-    
+
+  requirements.forEach(function (group, index) {
+
     var or = [];
-    
-    group.forEach(function(requirement, index){
-            
-        or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))  
-      
+
+    group.forEach(function (requirement, index) {
+
+      or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))
+
     });
-      
+
     requirements_array.push(or);
-    
+
   });
-  
+
   var choices_array = [];
-  
-  choices.forEach(function(choice){
-    
+
+  choices.forEach(function (choice) {
+
     var actions = [];
-    
+
     //Create actions array
-    
-    choice.actions.forEach(function(action){
-      
+
+    choice.actions.forEach(function (action) {
+
       actions.push(new A.action(action.target, action.value));
-      
+
     });
-    
+
     var requirements_array = [];
 
-    choice.requirements.forEach(function(group, index){
+    choice.requirements.forEach(function (group, index) {
 
       var or = [];
 
-      group.forEach(function(requirement, index){
+      group.forEach(function (requirement, index) {
 
-          or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))  
+        or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))
 
       });
 
       requirements_array.push(or);
 
     });
-    
+
     var choice = new A.choice(choice.text, requirements_array, actions, choice.id, choice.message);
-    
+
     choices_array.push(choice);
-      
+
   });
-  
+
   this.choices = choices_array;
-  
+
   this.requirements = requirements_array;
-  
+
   var self = this;
 
   var public = {
@@ -84,39 +84,31 @@ A.thing = function (id, name, description, value, requirements, choices) {
 
     },
 
-    getName: function () {
+    get name() {
 
       return self.name;
 
     },
-    
-    checkVisibility: function(){
-     
-      return A.requirementsCheck(self.requirements);
-      
+
+    get id() {
+
+      return self.id;
+
     },
-    
-    listChoices: function(){
-    
-     //List only visible choices
-      
-      var output = [];
-      
-      self.choices.forEach(function(element){
-                
-        if(element.checkVisibility()){
-                    
-          output.push({id:element.id, text:element.text, trigger:element.trigger});
-          
-        };
-        
-      });
-      
-      if(output.length > 0){
-      return output; 
-      }
-    
-    }
+
+    get choices() {
+
+      //List only visible choices
+
+      return self.choices;
+
+    },
+
+    get visibility() {
+
+      return A.requirementsCheck(self.requirements);
+
+    },
 
   }
 

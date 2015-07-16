@@ -109,32 +109,24 @@ function adventure_core_output($path, $gameid = null) {
       //Loop over actions
       
       $actions = array();
-      
+            
       foreach ($loaded_choice->field_action['und'] as $key => $action){
-      
-        $id = $action['value'];
         
-        $loaded_action = entity_load('field_collection_item', array($id));
+            $loaded_action = entity_load('field_collection_item', array($action['value']));
         
-        $loaded_action = $loaded_action[$id];
+  $loaded_action = $loaded_action[$action['value']];
+              
+  $action = array(
         
-        $value_change_id = $loaded_action->field_thing_value_change['und'][0]['value'];
-        
-        $value_change = entity_load('field_collection_item', array($value_change_id));
-        
-        $value_change = $value_change[$value_change_id];
-                
-        $action = array(
-        
-          "target" => $value_change->field_thing_reference['und'][0]['target_id'],
-          "value" => $value_change->field_thing_value['und'][0]['value']
+          "target" => $loaded_action->field_thing_reference['und'][0]['target_id'],
+          "value" => $loaded_action->field_thing_value['und'][0]['value']
           
         );
           
         $actions[] = $action;
         
       }
-      
+            
       $choice['actions'] = $actions;
       
       $choices[] = $choice; 

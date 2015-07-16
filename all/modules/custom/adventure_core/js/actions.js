@@ -2,14 +2,16 @@
 
 A.action = function (subject, value) {
 
-  this.subject = subject;
-  this.value = value;
-  self = this;
+  return {
 
-  return function () {
+    trigger: function () {
+      
+      A.things[subject].value = value;
+
+    },
     
-    A.things[self.subject].value = self.value;
-    
-  };
+    name: subject,
+    value: value
+  }
 
 };

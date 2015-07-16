@@ -1,6 +1,12 @@
 //Placeholder for requirement creation
 
 A.requirementsCheck = function (requirementsarrays) {
+  
+  if(requirementsarrays.length === 0){
+   
+    return true;
+    
+  }
 
   var pass;
 

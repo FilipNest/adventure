@@ -10,35 +10,35 @@ A.choice = function (text, requirements, actions, id, message) {
 
   var public = {
 
-    checkVisibility: function () {
+    get visibility() {
 
       return A.requirementsCheck(self.requirements);
 
     },
-    
-    get text(){
-     
+
+    get text() {
+
       return self.text;
-      
+
     },
-    
-    get id(){
-     
+
+    get id() {
+
       return self.id;
-      
+
     },
 
     trigger: function () {
 
       if (A.requirementsCheck(self.requirements)) {
 
-        self.actions.forEach(function(element, index){
-                    
-          element();
-          
+        self.actions.forEach(function (element, index) {
+
+          element.trigger();
+
         });
-        
-        return self.message;
+
+        A.messages.push(self.message);
 
       } else {
 
