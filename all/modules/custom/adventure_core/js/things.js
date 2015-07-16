@@ -19,7 +19,7 @@ A.thing = function (id, name, description, value, requirements, choices) {
 
     group.forEach(function (requirement, index) {
 
-      or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))
+      or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value,requirement.negate))
 
     });
 
@@ -49,7 +49,7 @@ A.thing = function (id, name, description, value, requirements, choices) {
 
       group.forEach(function (requirement, index) {
 
-        or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value))
+        or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value, requirement.negate))
 
       });
 

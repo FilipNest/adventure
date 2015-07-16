@@ -2,12 +2,14 @@
 
 A.requirementsCheck = function (requirementsarrays) {
   
+  //Return true if no requirements set
+  
   if(requirementsarrays.length === 0){
    
     return true;
     
   }
-
+  
   var pass;
 
   requirementsarrays.forEach(function (requirements) {
@@ -38,7 +40,7 @@ A.requirementsCheck = function (requirementsarrays) {
 
 };
 
-A.requirement = function (subject, operator, value) {
+A.requirement = function (subject, operator, value, negate) {
 
   var subject = subject.toLowerCase(),
     operator;
@@ -46,7 +48,8 @@ A.requirement = function (subject, operator, value) {
   this.value = value;
   this.subject = subject;
   this.operator = operator;
-
+  this.negate = negate;
+  
   var self = this;
 
   var public = function () {
@@ -70,6 +73,14 @@ A.requirement = function (subject, operator, value) {
         break;
 
     }
+    
+    //Flip result if negate is set
+
+    if(negate === "1"){
+      
+      result = !result;
+      
+    };
 
     return result;
 
