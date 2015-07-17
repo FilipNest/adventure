@@ -2,7 +2,7 @@
 
 A.things = {};
 
-A.thing = function (id, name, description, value, requirements, choices) {
+A.thing = function (id, name, description, value, requirements, choices, location) {
 
   var name = name.toLowerCase();
 
@@ -10,7 +10,8 @@ A.thing = function (id, name, description, value, requirements, choices) {
   this.name = name;
   this.description = description;
   this.value = value;
-
+  this.location = location;
+  
   var requirements_array = [];
 
   requirements.forEach(function (group, index) {
@@ -19,7 +20,7 @@ A.thing = function (id, name, description, value, requirements, choices) {
 
     group.forEach(function (requirement, index) {
 
-      or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value,requirement.negate))
+      or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value, requirement.negate))
 
     });
 
@@ -37,7 +38,7 @@ A.thing = function (id, name, description, value, requirements, choices) {
 
     choice.actions.forEach(function (action) {
 
-      actions.push(new A.action(action.target, action.value));
+      actions.push(new A.action(action.target, action.property, action.value));
 
     });
 
@@ -81,6 +82,36 @@ A.thing = function (id, name, description, value, requirements, choices) {
     get value() {
 
       return self.value;
+
+    },
+
+    get description() {
+
+      return self.description;
+
+    },
+
+    set description(value) {
+
+      self.description = value;
+
+    },
+    
+    get location() {
+
+      return self.location;
+
+    },
+
+    set location(value) {
+
+      self.location = value;
+
+    },
+
+    get description() {
+
+      return self.description;
 
     },
 

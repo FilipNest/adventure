@@ -72,6 +72,7 @@ function adventure_core_output($path, $gameid = null) {
     $output['id'] = $thing->nid;
     $output['name'] = $thing->title;
     $output['description'] = $thing->field_thing_description['und'][0]['value'];
+        $output['location'] = $thing->field_thing_location['und'][0]['value'];
     $output['value'] = $thing->field_thing_value['und'][0]['value'];
     
     //Get viewing requirements
@@ -115,10 +116,11 @@ function adventure_core_output($path, $gameid = null) {
             $loaded_action = entity_load('field_collection_item', array($action['value']));
         
   $loaded_action = $loaded_action[$action['value']];
-              
+                      
   $action = array(
         
           "target" => $loaded_action->field_thing_reference['und'][0]['target_id'],
+              "property" => $loaded_action->field_property_type['und'][0]['value'],
           "value" => $loaded_action->field_thing_value['und'][0]['value']
           
         );

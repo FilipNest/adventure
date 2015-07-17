@@ -45,6 +45,10 @@ drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/front.js");
     <li ng-repeat="thing in things" ng-if="thing.visibility">
       <b>{{thing.name}}</b>
       <br />
+      <span>{{thing.description}}</span>
+      <br />
+      <span>{{thing.location}}</span>
+      <br />
       <span>{{thing.value}}</span>
       <ul>
         <li ng-if="choice.visibility" ng-repeat="choice in thing.choices" ng-click="choice.trigger()">{{choice.text}}</li>
