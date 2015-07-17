@@ -37,9 +37,9 @@ A.choice = function (text, requirements, actions, id, message) {
           element.trigger();
 
         });
-
-        A.messages.push(self.message);
-
+        
+        A.messages.push({id:self.id,message:self.message,timestamp:new Date()});
+        
       } else {
 
         throw Error("Requirements not met");

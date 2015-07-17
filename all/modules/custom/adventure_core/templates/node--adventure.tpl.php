@@ -32,13 +32,13 @@ drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/front.js");
 
     <ul>Things</ul>
 
-    <section>
+    <section id="messages">
 
       <h3>
       
-      {{messages[messages.length-1]}}
+      {{messages[messages.length-1].message}}
       
-      </h3>
+      </h3> 
 
     </section>
 
