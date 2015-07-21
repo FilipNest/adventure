@@ -1,2 +1,18 @@
+html {font-family: sans-serif;}
 .main-container {z-index: 1; position:relative;}
 #map {position: fixed; top:80px; height:100%; width:100%; z-index:0;}
+button {border-style:solid;}
+button.selected {
+ 
+  background-color: white;
+  color:black;
+  
+}
+
+body {font-size:16px;}
+h1 {font-size:200%;}
+h2 {font-size:150%;}
+
+#choices {text-align: center;}
+#choices ul {margin: 0px; padding:0px; width:300px; margin:auto;}
+.choice {list-style: none; background-color:white; border-style:solid; border-color:black; padding:10px; cursor: pointer;}

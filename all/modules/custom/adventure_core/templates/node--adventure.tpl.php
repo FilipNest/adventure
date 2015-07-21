@@ -1,18 +1,28 @@
 <section ng-controller="main">
 
-  <button ng-click="section = 'mapView'">Map</button>
-  <button ng-click="section = 'messages'">Messages</button>
-  <button ng-click="section = 'things'">Things</button>
+  <button ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
+  <button ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
+  <button ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Things</button>
 
-  
-<section id="choices" ng-show="section == 'choices'">
-  
-  <ul>
-        <li ng-if="choice.visibility" ng-repeat="choice in currentThing.choices" ng-click="choice.trigger()";>{{choice.text}}</li>
-      </ul>
-  
-</section>
-  
+
+  <section id="choices" ng-show="section == 'choices'">
+
+    <h1>{{currentThing.name}}</h1>
+    <p>
+      <i>{{currentThing.description}}</i>
+    </p>
+    <p>
+      Current state:
+      <br /> {{currentThing.value}}
+    </p>
+
+    <h2>Choices</h2>
+    <ul>
+      <li class="choice" ng-if="choice.visibility" ng-repeat="choice in currentThing.choices" ng-click="choice.trigger()" ;>{{choice.text}}</li>
+    </ul>
+
+  </section>
+
   <section id="messages" ng-show="section == 'messages'">
 
     <h3>
@@ -25,7 +35,7 @@
 
   <section id="things" ng-show="section == 'things'">
 
-    <li ng-repeat="thing in things" ng-if="thing.visibility">
+    <li ng-repeat="thing in things" ng-if="thing.visibility && thing.location == 'home'">
       <b>{{thing.name}}</b>
       <br />
       <span>{{thing.description}}</span>
