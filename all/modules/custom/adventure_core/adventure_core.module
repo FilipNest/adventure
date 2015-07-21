@@ -101,6 +101,8 @@ function adventure_core_output($path, $gameid = null) {
                   
       $choice['text'] = $loaded_choice->field_choice_name['und'][0]['value'];
       
+      $choice['message_title'] = $loaded_choice->field_action_message_title['und'][0]['value'];
+      
       $choice['message'] = $loaded_choice->field_action_message['und'][0]['value'];
       
       $choice['id'] = $id;

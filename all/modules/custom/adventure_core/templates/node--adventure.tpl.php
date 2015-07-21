@@ -25,12 +25,15 @@
 
   <section id="messages" ng-show="section == 'messages'">
 
-    <h3>
-      
-      {{messages[messages.length-1].message}}
-      
-      </h3>
+    <article class="message" ng-repeat="item in messages | orderBy:'-timestamp'">
 
+      <h1>{{item.title}}</h1>
+      <p>{{item.message}}</p>
+      <br />
+      <small>{{item.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+
+
+    </article>
   </section>
 
   <section id="things" ng-show="section == 'things'">

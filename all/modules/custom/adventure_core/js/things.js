@@ -58,7 +58,7 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
 
     });
 
-    var choice = new A.choice(choice.text, requirements_array, actions, choice.id, choice.message);
+    var choice = new A.choice(choice.text, requirements_array, actions, choice.id, choice.message, choice.message_title);
 
     choices_array.push(choice);
 

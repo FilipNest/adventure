@@ -1,10 +1,11 @@
-A.choice = function (text, requirements, actions, id, message) {
+A.choice = function (text, requirements, actions, id, message, message_title) {
 
   this.requirements = requirements;
   this.actions = actions;
   this.id = id;
   this.text = text;
   this.message = message;
+  this.message_title = message_title;
 
   var self = this;
 
@@ -41,6 +42,7 @@ A.choice = function (text, requirements, actions, id, message) {
         if (self.message) {
           A.messages.push({
             id: self.id,
+            title: self.message_title,
             message: self.message,
             timestamp: new Date()
           });

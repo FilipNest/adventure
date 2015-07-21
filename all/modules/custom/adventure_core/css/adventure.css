@@ -16,3 +16,6 @@ h2 {font-size:150%;}
 #choices {text-align: center;}
 #choices ul {margin: 0px; padding:0px; width:300px; margin:auto;}
 .choice {list-style: none; background-color:white; border-style:solid; border-color:black; padding:10px; cursor: pointer;}
+
+#messages {max-width:100%; margin:auto; width:700px; text-align: center;}
+.message {border-width: 0 0 2px 0; border-style: solid; padding-bottom: 10px;}
