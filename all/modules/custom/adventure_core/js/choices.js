@@ -37,9 +37,22 @@ A.choice = function (text, requirements, actions, id, message) {
           element.trigger();
 
         });
-        
-        A.messages.push({id:self.id,message:self.message,timestamp:new Date()});
-        
+
+        if (self.message) {
+          A.messages.push({
+            id: self.id,
+            message: self.message,
+            timestamp: new Date()
+          });
+
+          jQuery(document).trigger("actionWithMessage");
+
+        } else {
+
+          jQuery(document).trigger("actionNoMessage");
+
+        }
+
       } else {
 
         throw Error("Requirements not met");

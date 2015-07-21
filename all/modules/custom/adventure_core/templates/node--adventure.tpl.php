@@ -1,4 +1,50 @@
-<?php
+<section ng-controller="main">
+
+  <button ng-click="section = 'mapView'">Map</button>
+  <button ng-click="section = 'messages'">Messages</button>
+  <button ng-click="section = 'things'">Things</button>
+
+  
+<section id="choices" ng-show="section == 'choices'">
+  
+  <ul>
+        <li ng-if="choice.visibility" ng-repeat="choice in currentThing.choices" ng-click="choice.trigger()";>{{choice.text}}</li>
+      </ul>
+  
+</section>
+  
+  <section id="messages" ng-show="section == 'messages'">
+
+    <h3>
+      
+      {{messages[messages.length-1].message}}
+      
+      </h3>
+
+  </section>
+
+  <section id="things" ng-show="section == 'things'">
+
+    <li ng-repeat="thing in things" ng-if="thing.visibility">
+      <b>{{thing.name}}</b>
+      <br />
+      <span>{{thing.description}}</span>
+      <br />
+      <span>{{thing.location}}</span>
+      <br />
+      <span>{{thing.value}}</span>
+      <button ng-click=selectThing(thing)>Open</button>
+    </li>
+
+  </section>
+
+  <section id="mapview" ng-show="section == 'mapView'">
+
+    <div id="map"></div>
+
+  </section>
+
+  <?php
 
 global $base_url;
 
@@ -9,7 +55,12 @@ drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/requirements.js
 drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/choices.js");
 drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/actions.js");
 
+drupal_add_css(drupal_get_path('module', 'adventure_core') . "/css/adventure.css");
   drupal_add_js('https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js', 'external');
+
+drupal_add_js('https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js', 'external');
+
+drupal_add_css('https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css', 'external');
 
 
 $options = array(
@@ -27,32 +78,3 @@ drupal_add_js('A.data ='.$result.';', array('type' => 'inline'));
 drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/front.js");
 
 ?>
-
-  <section ng-controller="thingList">
-
-    <ul>Things</ul>
-
-    <section id="messages">
-
-      <h3>
-      
-      {{messages[messages.length-1].message}}
-      
-      </h3> 
-
-    </section>
-
-    <li ng-repeat="thing in things" ng-if="thing.visibility">
-      <b>{{thing.name}}</b>
-      <br />
-      <span>{{thing.description}}</span>
-      <br />
-      <span>{{thing.location}}</span>
-      <br />
-      <span>{{thing.value}}</span>
-      <ul>
-        <li ng-if="choice.visibility" ng-repeat="choice in thing.choices" ng-click="choice.trigger()">{{choice.text}}</li>
-      </ul>
-    </li>
-
-  </section>
