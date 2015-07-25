@@ -3,11 +3,19 @@
   $(document).ready(function () {
 
     A.messages = [];
+    
+    if($.isEmptyObject(A.data)){
+     
+      $("body").html("You need to create some things");
+      
+      return false;
+      
+    }
 
     //Set up objects
 
-    $.each(A.data, function (index, element) {
-
+    $.each(A.data.rawThings, function (index, element) {
+            
       new A.thing(element.id, element.name, element.description, element.value, element.viewing_requirements, element.choices, element.location);
 
     });
@@ -35,7 +43,9 @@
       });
 
       $scope.section = "mapView";
-
+      
+      $scope.admin = A.data.owner;
+      
       $scope.messages = A.messages;
       $scope.things = A.things;
 

@@ -6,6 +6,7 @@
 
 include_once 'adventure_core.features.inc';
 
+module_load_include('inc', 'node', 'node.pages');
 
 function adventure_core_menu() {
     $items['fetch/game'] = array(
@@ -14,7 +15,32 @@ function adventure_core_menu() {
         'delivery callback' => 'drupal_json_output',
         'page arguments' => array(1),
     );
-    return $items;
+      $items['edit_thing/%node'] = array(
+    'title' => 'Edit a thing',
+    'page callback' => 'adventure_core_thing_edit_form',
+    'page arguments' => array(1),
+    'access callback' => TRUE
+  );
+
+  return $items;
+}
+
+function adventure_core_thing_edit_form($node) {
+  
+  global $user;
+  
+  if($user->uid === $node->uid){
+    
+ $form = drupal_get_form($node->type .'_node_form', $node);
+
+  return render($form);
+    
+  } else {
+    
+   return "Access denied"; 
+    
+  }
+  
 }
 
 
@@ -46,9 +72,9 @@ function adventure_core_output($path, $gameid = null) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
   ->entityCondition('bundle', 'thing')
-  ->propertyCondition('status', 1) // published? yes
+  ->propertyCondition('status', 1)
   ->fieldCondition('field_adventure_reference', 'target_id', $gameid)
-  ->range(0, 10); //do not forget the semicolon at the end of the query conditions
+  ->range(0, 10);
   $result = $query->execute();
 
   
@@ -143,7 +169,15 @@ function adventure_core_output($path, $gameid = null) {
     
   }
   
-  return $return;
+  $result = array();
+  $result['rawThings'] = $return;
+  
+  $node = node_load($gameid);
+  $result['name'] = $node->title;
+  $result['id'] = $node->nid;
+  $result['author'] = $node->uid;
+  
+  return $result;
   
 }
 
