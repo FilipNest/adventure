@@ -3,19 +3,19 @@
   $(document).ready(function () {
 
     A.messages = [];
-    
-    if($.isEmptyObject(A.data)){
-     
+
+    if ($.isEmptyObject(A.data)) {
+
       $("body").html("You need to create some things");
-      
+
       return false;
-      
+
     }
 
     //Set up objects
 
     $.each(A.data.rawThings, function (index, element) {
-            
+
       new A.thing(element.id, element.name, element.description, element.value, element.viewing_requirements, element.choices, element.location);
 
     });
@@ -43,9 +43,9 @@
       });
 
       $scope.section = "mapView";
-      
+
       $scope.admin = A.data.owner;
-      
+
       $scope.messages = A.messages;
       $scope.things = A.things;
 
@@ -123,6 +123,22 @@
     });
 
     var activeLayers = [];
+
+    //Bring up the thing edit form
+
+    $(".edit-thing").on("click", function () {
+
+      var nid = $(this).attr("data-nid");
+
+      $("#thing-form").load("/edit_thing/" + nid);
+
+    });
+
+    $(".create-thing").on("click", function () {
+
+      $("#thing-form").load("/create_thing");
+
+    });
 
   });
 

@@ -20,17 +20,10 @@ $owner = $user->uid === $node->uid;
 
         <?php print views_embed_view('current_adventure', 'block_1'); ?>
       
-              <?php print views_embed_view('editable_things', 'block_1'); ?>
+      
+              <?php print views_embed_view('editable_things', 'block'); ?>
 
           <?php endif; ?>
-
-
-            <script>
-              function adventure_core_ajax_load() {
-                jQuery("#thing-form").load("/edit_thing/2");
-              }
-
-            </script>
 
             <div id="thing-form"></div>
 

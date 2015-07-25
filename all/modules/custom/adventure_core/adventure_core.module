@@ -15,9 +15,15 @@ function adventure_core_menu() {
         'delivery callback' => 'drupal_json_output',
         'page arguments' => array(1),
     );
-      $items['edit_thing/%node'] = array(
+    $items['edit_thing/%node'] = array(
     'title' => 'Edit a thing',
     'page callback' => 'adventure_core_thing_edit_form',
+    'page arguments' => array(1),
+    'access callback' => TRUE
+  );
+  $items['create_thing'] = array(
+    'title' => 'Create a thing',
+    'page callback' => 'adventure_core_thing_create_form',
     'page arguments' => array(1),
     'access callback' => TRUE
   );
@@ -43,6 +49,22 @@ function adventure_core_thing_edit_form($node) {
   
 }
 
+function adventure_core_thing_create_form() {
+  
+  global $user;
+  
+  if($user->uid !== 0){
+    
+  $form = node_add('thing');
+    return drupal_render($form);
+    
+  } else {
+    
+   return "Access denied"; 
+    
+  }
+  
+}
 
   /**
    * Implements hook_theme().
