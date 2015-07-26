@@ -66,6 +66,9 @@ function adventure_core_thing_create_form() {
   
 }
 
+
+//Add extra global things to thing picker
+
   /**
    * Implements hook_theme().
    */
@@ -88,8 +91,15 @@ function adventure_core_output($path, $gameid = null) {
     return false;
     
   }
-    
-  $output = "";
+  
+  $adventure = array();
+  
+  $node = node_load($gameid);
+  $adventure['name'] = $node->title;
+  $adventure['id'] = $node->nid;
+  $adventure['author'] = $node->uid;
+  
+  $adventure['rawThings'] = array();
   
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
@@ -105,7 +115,7 @@ function adventure_core_output($path, $gameid = null) {
     $things = entity_load('node', $thing_nids);
   } else {
    
-    return false;
+    return $adventure;
     
   }
   
@@ -191,15 +201,10 @@ function adventure_core_output($path, $gameid = null) {
     
   }
   
-  $result = array();
-  $result['rawThings'] = $return;
+  $adventure['rawThings'] = $return;
+
   
-  $node = node_load($gameid);
-  $result['name'] = $node->title;
-  $result['id'] = $node->nid;
-  $result['author'] = $node->uid;
-  
-  return $result;
+  return $adventure;
   
 }
 

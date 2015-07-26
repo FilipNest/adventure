@@ -37,11 +37,28 @@ function adventure_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Adventure reference (field_adventure_reference) */
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['id'] = 'field_adventure_reference_target_id';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['table'] = 'field_data_field_adventure_reference';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['field'] = 'field_adventure_reference_target_id';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['default_argument_options']['code'] = 'global $user;
+$flags = flag_get_user_flags(\'node\', $entity_id = NULL, $user->uid, $sid = NULL);
+$flags = $flags[\'current_adventure\'];
+$flags = array_values($flags);
+$flags = array_shift($flags);
+$flag = (string)$flags->entity_id . "+" . "1";
+return $flag;';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_adventure_reference_target_id']['break_phrase'] = TRUE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -61,6 +78,8 @@ function adventure_core_views_default_views() {
   $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'entityreference_style';
   $handler->display->display_options['style_options']['search_fields'] = array(

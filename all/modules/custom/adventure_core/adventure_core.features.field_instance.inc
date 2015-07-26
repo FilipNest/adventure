@@ -479,47 +479,43 @@ function adventure_core_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-adventure-body'
-  $field_instances['node-adventure-body'] = array(
+  // Exported field_instance: 'node-adventure-field_adventure_description'
+  $field_instances['node-adventure-field_adventure_description'] = array(
     'bundle' => 'adventure',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'field_name' => 'field_adventure_description',
+    'label' => 'Adventure description',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
+        'rows' => 5,
       ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => -4,
+      'type' => 'text_textarea',
+      'weight' => 31,
     ),
   );
 
@@ -527,7 +523,7 @@ function adventure_core_field_default_field_instances() {
   $field_instances['node-thing-field_adventure_reference'] = array(
     'bundle' => 'thing',
     'default_value' => NULL,
-    'default_value_function' => 'entityreference_prepopulate_field_default_value',
+    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -554,15 +550,7 @@ function adventure_core_field_default_field_instances() {
     'settings' => array(
       'behaviors' => array(
         'prepopulate' => array(
-          'action' => 'none',
-          'action_on_edit' => 1,
-          'fallback' => 'form_error',
-          'providers' => array(
-            'og_context' => FALSE,
-            'url' => 1,
-          ),
-          'skip_perm' => 0,
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'user_register_form' => FALSE,
@@ -821,8 +809,8 @@ function adventure_core_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Actions');
+  t('Adventure description');
   t('Adventure reference');
-  t('Body');
   t('Choices');
   t('Comparison operator');
   t('Location');

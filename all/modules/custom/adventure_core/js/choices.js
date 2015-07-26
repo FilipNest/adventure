@@ -1,5 +1,5 @@
 A.choice = function (text, requirements, actions, id, message, message_title) {
-
+  
   this.requirements = requirements;
   this.actions = actions;
   this.id = id;

@@ -11,7 +11,7 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
   this.description = description;
   this.value = value;
   this.location = location;
-  
+
   var requirements_array = [];
 
   requirements.forEach(function (group, index) {
@@ -19,6 +19,14 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
     var or = [];
 
     group.forEach(function (requirement, index) {
+
+      //Check if requirement relates to self
+
+      if (requirement.thing === "7") {
+
+        requirement.thing = id;
+
+      }
 
       or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value, requirement.negate))
 
@@ -37,6 +45,12 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
     //Create actions array
 
     choice.actions.forEach(function (action) {
+      
+      if(action.target === "7"){
+        
+        action.target = id;
+        
+      };
 
       actions.push(new A.action(action.target, action.property, action.value));
 
@@ -49,6 +63,12 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
       var or = [];
 
       group.forEach(function (requirement, index) {
+
+        if (requirement.thing === "7") {
+
+          requirement.thing = id;
+
+        };
 
         or.push(new A.requirement(requirement.thing, requirement.operator, requirement.value, requirement.negate))
 
@@ -96,7 +116,7 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
       self.description = value;
 
     },
-    
+
     get location() {
 
       return self.location;

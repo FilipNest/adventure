@@ -53,7 +53,7 @@ A.requirement = function (subject, operator, value, negate) {
   var self = this;
 
   var public = function () {
-
+  
     var currentValue = A.things[self.subject].value,
       result;
 

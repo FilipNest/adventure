@@ -4,14 +4,6 @@
 
     A.messages = [];
 
-    if ($.isEmptyObject(A.data)) {
-
-      $("body").html("You need to create some things");
-
-      return false;
-
-    }
-
     //Set up objects
 
     $.each(A.data.rawThings, function (index, element) {
@@ -48,26 +40,34 @@
 
       $scope.messages = A.messages;
       $scope.things = A.things;
+      
+      $scope.activeLayers = [];
 
       $scope.$watch('things', function (newValue, oldValue) {
+        
+        //Clear active layers ready for replacing
+
+        $scope.activeLayers.forEach(function (element, index) {
+          
+          map.removeLayer(element);
+
+        });
+        
+        //Clear active layers array
+        
+        $scope.activeLayers = [];
 
         $.each(newValue, function (index, thing) {
 
           if (thing.visibility) {
 
-            //Clear active layers
+            if (thing.location) {
 
-            activeLayers.forEach(function (element, index) {
+              var location = thing.location.split(",");
 
-              map.removeLayer(element);
+            }
 
-            });
-
-            activeLayers = [];
-
-            var location = thing.location.split(",");
-
-            if (location.length == 2) {
+            if (location && location.length == 2) {
 
               var latlng = L.latLng(parseFloat(location[0]), parseFloat(location[1]));
 
@@ -81,15 +81,17 @@
 
               });
 
-              activeLayers.push(marker);
+              $scope.activeLayers.push(marker);
 
             };
 
           };
 
         });
+        
+        //Replace;
 
-        activeLayers.forEach(function (element, index) {
+        $scope.activeLayers.forEach(function (element, index) {
 
           map.addLayer(element);
 

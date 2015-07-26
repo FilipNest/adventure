@@ -5,6 +5,15 @@
  */
 
 /**
+ * Implements hook_ctools_plugin_api().
+ */
+function adventure_core_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => "1");
+  }
+}
+
+/**
  * Implements hook_views_api().
  */
 function adventure_core_views_api($module = NULL, $api = NULL) {
@@ -30,7 +39,7 @@ function adventure_core_flag_default_flags() {
     'unflag_short' => 'Unflag this item',
     'unflag_long' => '',
     'unflag_message' => '',
-    'unflag_denied_text' => '',
+    'unflag_denied_text' => 'Flagged',
     'link_type' => 'normal',
     'weight' => 0,
     'show_in_links' => array(
@@ -44,11 +53,11 @@ function adventure_core_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => FALSE,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 'adventure_core',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   return $flags;
 

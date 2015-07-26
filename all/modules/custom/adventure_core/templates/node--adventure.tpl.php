@@ -1,11 +1,27 @@
 <?php
 
 //Check if current user is the owner of the Adventure. This is also available as a A.data.owner paramater on the clientside.
+global $user;
 
-$owner = $user->uid === $node->uid;
+//Check if current adventure set
+
+$flags = flag_get_user_flags('node', $entity_id = NULL, $user->uid, $sid = NULL);
+$flags = $flags['current_adventure'];
+$flags = array_values($flags);
+$flags = array_shift($flags);
+$flag = (string)$flags->entity_id;
+
+if($flag === $node->nid && $user->uid === $node->uid){
+ 
+  $owner = true;
+  
+} else {
+ 
+  $owner = false;
+  
+}
 
 ?>
-
 
   <section ng-controller="main">
 
