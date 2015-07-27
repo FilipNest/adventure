@@ -6,18 +6,21 @@ global $user;
 //Check if current adventure set
 
 $flags = flag_get_user_flags('node', $entity_id = NULL, $user->uid, $sid = NULL);
-$flags = $flags['current_adventure'];
-$flags = array_values($flags);
-$flags = array_shift($flags);
-$flag = (string)$flags->entity_id;
 
-if($flag === $node->nid && $user->uid === $node->uid){
- 
-  $owner = true;
-  
-} else {
- 
-  $owner = false;
+$owner = false;
+
+if($flags){
+
+  $flags = $flags['current_adventure'];
+  $flags = array_values($flags);
+  $flags = array_shift($flags);
+  $flag = (string)$flags->entity_id;
+
+  if($flag === $node->nid && $user->uid === $node->uid){
+
+    $owner = true;
+
+  }
   
 }
 
@@ -25,17 +28,18 @@ if($flag === $node->nid && $user->uid === $node->uid){
 
   <section ng-controller="main">
 
+    <header>
+    
     <button ng-show="admin === 1" ng-class="{selected: section == 'edit'}" ng-click="section = 'edit'">Edit</button>
-    <button ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
-    <button ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
-    <button ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Things</button>
+    <button id="map-button" ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
+    <button id="messages-button" ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
+<!--    <button ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Things</button>-->
+      <div id="home"></div>
+      </header>
 
     <section id="edit" ng-show="section == 'edit'">
 
-      <?php if ($owner): ?>
-
-        <?php print views_embed_view('current_adventure', 'block_1'); ?>
-      
+      <?php if ($owner): ?>      
       
               <?php print views_embed_view('editable_things', 'block'); ?>
 

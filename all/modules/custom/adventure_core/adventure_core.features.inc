@@ -33,7 +33,7 @@ function adventure_core_flag_default_flags() {
     'types' => array(
       0 => 'adventure',
     ),
-    'flag_short' => 'Flag this item',
+    'flag_short' => 'Edit this adventure',
     'flag_long' => '',
     'flag_message' => '',
     'unflag_short' => 'Unflag this item',
@@ -50,8 +50,8 @@ function adventure_core_flag_default_flags() {
     ),
     'show_as_field' => 0,
     'show_on_form' => 0,
-    'access_author' => '',
-    'show_contextual_link' => FALSE,
+    'access_author' => 'own',
+    'show_contextual_link' => 0,
     'i18n' => 0,
     'module' => 'adventure_core',
     'locked' => array(
