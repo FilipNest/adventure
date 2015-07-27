@@ -607,42 +607,6 @@ function adventure_core_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-thing-field_map_picker'
-  $field_instances['node-thing-field_map_picker'] = array(
-    'bundle' => 'thing',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'markup',
-        'settings' => array(),
-        'type' => 'markup_default',
-        'weight' => 10,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_map_picker',
-    'label' => 'Map',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'markup',
-      'settings' => array(),
-      'type' => 'markup',
-      'weight' => 9,
-    ),
-  );
-
   // Exported field_instance: 'node-thing-field_requirements'
   $field_instances['node-thing-field_requirements'] = array(
     'bundle' => 'thing',
@@ -723,6 +687,56 @@ function adventure_core_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-thing-field_thing_icon'
+  $field_instances['node-thing-field_thing_icon'] = array(
+    'bundle' => 'thing',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_thing_icon',
+    'label' => 'Thing icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'icons',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 10,
     ),
   );
 
@@ -814,7 +828,6 @@ function adventure_core_field_default_field_instances() {
   t('Choices');
   t('Comparison operator');
   t('Location');
-  t('Map');
   t('Message');
   t('Message title');
   t('Name of choice');
@@ -825,6 +838,7 @@ function adventure_core_field_default_field_instances() {
   t('Target');
   t('Thing (subject)');
   t('Thing description');
+  t('Thing icon');
   t('Value');
 
   return $field_instances;

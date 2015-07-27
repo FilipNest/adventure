@@ -2,7 +2,7 @@
 
 A.things = {};
 
-A.thing = function (id, name, description, value, requirements, choices, location) {
+A.thing = function (id, name, description, value, requirements, choices, location, icon) {
 
   var name = name.toLowerCase();
 
@@ -11,6 +11,7 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
   this.description = description;
   this.value = value;
   this.location = location;
+  this.icon = icon;
 
   var requirements_array = [];
 
@@ -121,6 +122,12 @@ A.thing = function (id, name, description, value, requirements, choices, locatio
 
       return self.location;
 
+    },
+    
+    get icon() {
+
+      return self.icon;
+      
     },
 
     set location(value) {

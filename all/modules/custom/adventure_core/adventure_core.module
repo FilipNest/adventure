@@ -123,10 +123,29 @@ function adventure_core_output($path, $gameid = null) {
   
   $return = array();
     
+  
   foreach($things as $thing){
     
-    $output = array();
-    
+    $output = array();    
+      
+    if($thing->field_thing_icon['und']){
+     
+      $path = image_style_url('icon', $thing->field_thing_icon['und'][0]['uri']);
+            
+      $dimensions = array("width"=>$thing->field_thing_icon['und'][0]['width'],"height" => $thing->field_thing_icon['und'][0]['height']);
+      
+image_dimensions_scale($dimensions,80,100);
+      
+      $output['icon'] = array(
+        
+        "path" => $path,
+        "width" => $dimensions['width'],
+        "height" => $dimensions['height']
+        
+        );
+      
+    }
+        
     $output['id'] = $thing->nid;
     $output['name'] = $thing->title;
     $output['description'] = $thing->field_thing_description['und'][0]['value'];

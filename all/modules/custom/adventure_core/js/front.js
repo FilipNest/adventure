@@ -8,7 +8,7 @@
 
     $.each(A.data.rawThings, function (index, element) {
 
-      new A.thing(element.id, element.name, element.description, element.value, element.viewing_requirements, element.choices, element.location);
+      new A.thing(element.id, element.name, element.description, element.value, element.viewing_requirements, element.choices, element.location, element.icon);
 
     });
 
@@ -40,21 +40,21 @@
 
       $scope.messages = A.messages;
       $scope.things = A.things;
-      
+
       $scope.activeLayers = [];
 
       $scope.$watch('things', function (newValue, oldValue) {
-        
+
         //Clear active layers ready for replacing
 
         $scope.activeLayers.forEach(function (element, index) {
-          
+
           map.removeLayer(element);
 
         });
-        
+
         //Clear active layers array
-        
+
         $scope.activeLayers = [];
 
         $.each(newValue, function (index, thing) {
@@ -73,6 +73,19 @@
 
               var marker = L.marker(latlng);
 
+              if (thing.icon) {
+
+                var myIcon = L.icon({
+                  iconUrl: thing.icon.path,
+                  iconSize: [thing.icon.width, thing.icon.height],
+                  iconAnchor: [thing.icon.width/2, thing.icon.height/2],
+                });
+
+                marker.setIcon(myIcon);
+
+
+              }
+
               marker.on("click", function () {
 
                 $scope.currentThing = thing;
@@ -88,7 +101,7 @@
           };
 
         });
-        
+
         //Replace;
 
         $scope.activeLayers.forEach(function (element, index) {

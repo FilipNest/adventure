@@ -64,6 +64,31 @@ function adventure_core_flag_default_flags() {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function adventure_core_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: icon.
+  $styles['icon'] = array(
+    'label' => 'Icon',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 80,
+          'height' => 100,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function adventure_core_node_info() {

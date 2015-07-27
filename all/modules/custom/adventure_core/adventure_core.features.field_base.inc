@@ -200,26 +200,6 @@ function adventure_core_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_map_picker'
-  $field_bases['field_map_picker'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_map_picker',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'markup',
-    'settings' => array(
-      'markup' => array(
-        'format' => 'full_html',
-        'value' => 'MAP TO GO HERE',
-      ),
-    ),
-    'translatable' => 0,
-    'type' => 'markup',
-  );
-
   // Exported field_base: 'field_negate'
   $field_bases['field_negate'] = array(
     'active' => 1,
@@ -332,6 +312,31 @@ function adventure_core_field_default_field_bases() {
     'settings' => array(),
     'translatable' => 0,
     'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_thing_icon'
+  $field_bases['field_thing_icon'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_thing_icon',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
   );
 
   // Exported field_base: 'field_thing_location'
