@@ -50,6 +50,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
+  <script src="//use.typekit.net/hif5rql.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>
