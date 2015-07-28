@@ -1,7 +1,8 @@
+* {max-width:100%;}
 html, body {margin:0px; padding:0px; font-family: sans-serif;}
-header {padding:10px; box-sizing: border-box;}
+header {padding:5px; box-sizing: border-box;}
 .main-container {z-index: 1; position:relative;}
-#map {position: fixed; top:70px; height:100%; width:100%; z-index:0;}
+#map {position: fixed; top:65px; height:100%; width:100%; z-index:0;}
 button {border-style:solid; border-color:transparent; outline: none;
 -webkit-filter:grayscale(1); cursor: pointer;
   margin-right:10px;
@@ -31,4 +32,8 @@ h2 {font-size:150%;}
 
 #messages-button {background-image: url("../images/messages.png"); width:50px; height:50px; background-size:contain; color:transparent; background-color: transparent; background-repeat: no-repeat; line-height:50px; background-position: center;}
 
-#home {background-image: url("../images/adventurepoint.png"); width:50px; height:50px; background-size:contain; color:transparent; background-color: transparent; background-repeat: no-repeat; line-height:50px; background-position: center; float:right;}
+#self-button {background-image: url("../images/self.png"); width:50px; height:50px; background-size:contain; color:transparent; background-color: transparent; background-repeat: no-repeat; line-height:50px; background-position: center;}
+
+#home-divider {float:right; width:1px; display:block; height:50px; line-height: 50px; background-color: black; position:relative; left:-10px;}
+#home {border-style:solid; border-color:black; border-width:2px; border-radius:100%; padding:5px; box-sizing: border-box; float:right;}
+#home a {display: block; background-image: url("../images/adventurepoint.png"); width:40px; height:40px; background-size:contain; color:transparent; background-color: transparent; background-repeat: no-repeat; line-height:50px; background-position: center;}
