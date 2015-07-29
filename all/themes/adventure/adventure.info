@@ -2,5 +2,5 @@ name = Adventure
 description = Adventure Stop theme 
 version = VERSION
 core = 7.x
-stylesheets[all][] = style.css
+stylesheets[all][] = css/adventure.css
 regions[content] = Content

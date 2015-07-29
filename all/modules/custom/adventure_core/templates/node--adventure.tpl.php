@@ -116,8 +116,6 @@ drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/things.js");
 drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/requirements.js");
 drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/choices.js");
 drupal_add_js(drupal_get_path('module', 'adventure_core') . "/js/actions.js");
-
-drupal_add_css(drupal_get_path('module', 'adventure_core') . "/css/adventure.css");
   drupal_add_js('https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js', 'external');
 
 drupal_add_js('https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js', 'external');

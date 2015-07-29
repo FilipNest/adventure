@@ -1,0 +1,192 @@
+* {
+  max-width: 100%;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "proxima-nova";
+  color: #59595A;
+}
+header {
+  position: fixed;
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #59595A;
+  border-width: 2px;
+  z-index: 5;
+  width: 100%;
+  top: 0px;
+}
+.main-container {
+  z-index: 1;
+  position: relative;
+}
+#map {
+  position: absolute;
+  overflow: hidden;
+  top: 68px;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+header h1 {
+  display: inline-block;
+  margin: 0px;
+}
+button {
+  border-style: solid;
+  border-color: transparent;
+  outline: none;
+  -webkit-filter: grayscale(1);
+  cursor: pointer;
+  margin-right: 10px;
+}
+button.selected {
+  -webkit-filter: grayscale(0);
+}
+#page-main {
+  position: relative;
+  top: 68px;
+  margin: auto;
+  width: 500px;
+}
+#page-main h1 {
+  font-size: 500%;
+  color: #73B6E6;
+  font-weight: 400;
+  margin: 20px 0px;
+}
+
+
+a:link, a:visited, a:active {text-decoration: none; color:inherit;}
+
+a.button {display: inline-block; padding:10px; background-color:#73B6E6; color:white; margin-right:10px; border-style:solid; border-width:2px; border-color: transparent;}
+a.button:hover {border-color: #59595A;}
+
+body {
+  font-size: 16px;
+}
+h1 {
+  font-size: 300%;
+  font-weight: 100;
+  font-style: normal;
+  text-transform: uppercase;
+}
+h2 {
+  font-size: 150%;
+}
+#choices {
+  text-align: center;
+}
+#choices ul {
+  margin: 0px;
+  padding: 0px;
+  width: 300px;
+  margin: auto;
+}
+.choice {
+  list-style: none;
+  background-color: white;
+  border-style: solid;
+  border-color: #59595A;
+  padding: 10px;
+  cursor: pointer;
+}
+#messages {
+  max-width: 100%;
+  margin: auto;
+  width: 700px;
+  text-align: center;
+}
+.message {
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  padding-bottom: 10px;
+}
+.edit-thing,
+.create-thing {
+  background-color: white;
+  border-style: solid;
+  color: #59595A;
+  padding: 5px;
+  display: inline-block;
+  margin: 10px 0 10px 0;
+  border-width: 1px;
+  cursor: pointer;
+}
+#thing-form {
+  border-style: solid;
+  border-width: 2px 0 0 0;
+}
+#map-button {
+  background-image: url("../images/map.png");
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  color: transparent;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#messages-button {
+  background-image: url("../images/messages.png");
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  color: transparent;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  line-height: 50px;
+  background-position: center;
+}
+#self-button {
+  background-image: url("../images/self.png");
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  color: transparent;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  line-height: 50px;
+  background-position: center;
+}
+#home-divider {
+  float: right;
+  width: 1px;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  background-color: #59595A;
+  position: relative;
+  left: -10px;
+}
+#home {
+  border-style: solid;
+  border-color: #59595A;
+  border-width: 2px;
+  border-radius: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  float: right;
+}
+#home a {
+  display: block;
+  background-image: url("../images/adventurepoint.png");
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  color: transparent;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  line-height: 50px;
+  background-position: center;
+}
