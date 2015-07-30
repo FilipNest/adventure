@@ -21,8 +21,8 @@ if($flags){
     $owner = true;
 
   }
-  
-}
+
+} 
 
 ?>
 
@@ -31,6 +31,15 @@ if($flags){
     <header>
 
       <button ng-show="admin === 1" ng-class="{selected: section == 'edit'}" ng-click="section = 'edit'">Edit</button>
+     
+    <?php
+      if ($user->uid === $node->uid) {
+   
+    print flag_create_link('current_adventure', $node->nid);
+
+  }
+?>
+      
       <button id="map-button" ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
       <button id="messages-button" ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
       <button id="self-button" ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Self</button>

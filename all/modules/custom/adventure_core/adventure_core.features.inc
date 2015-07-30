@@ -36,7 +36,7 @@ function adventure_core_flag_default_flags() {
     'flag_short' => 'Edit this adventure',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'Unflag this item',
+    'unflag_short' => 'Stop editing',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => 'Flagged',
