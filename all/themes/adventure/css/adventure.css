@@ -74,12 +74,18 @@ button.selected {
 .node-type-page {
   background-color: #73b6e6;
 }
+
+.node-type-page p {font-size:120%;}
+
+.node-type-page p a:link {text-decoration: underline;}
+
 #page-main {
   color: white;
   position: relative;
   top: 68px;
   margin: auto;
   width: 500px;
+  padding-bottom:10px;
 }
 #page-main h1 {
   font-size: 500%;
@@ -88,6 +94,15 @@ button.selected {
   text-shadow: -.04em .04em #59595A;
   text-align: left;
 }
+
+@media (max-width:500px){
+ 
+  #page-main h1 {font-size:300%; text-align: center;} 
+  
+  #page-main {padding:10px; box-sizing: border-box;}
+  
+}
+
 .front-logo {
   width: 150px;
   vertical-align: bottom;
