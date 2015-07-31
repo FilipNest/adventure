@@ -361,3 +361,5 @@ h2 {
 
 .filter-wrapper {display: none;}
 .ckeditor_links {display: none !important;}
+
+.form-type-checkbox .description {margin-left:0px;}
