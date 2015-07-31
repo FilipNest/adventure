@@ -1,6 +1,9 @@
 * {
   max-width: 100%;
 }
+
+img {height:auto;}
+
 html {
   height: 100%;
 }
@@ -252,7 +255,7 @@ h2 {
 }
 .view-adventures .views-row {
   width: 250px;
-  float: left;
+  display: inline-block;
 }
 .view-adventures img {
   margin-top: 10px;
