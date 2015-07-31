@@ -20,7 +20,7 @@
       angular.bootstrap(document, ['app']);
     });
 
-    function main($scope,$sce,$rootScope) {
+    function main($scope, $sce, $rootScope) {
 
       $rootScope.renderHtml = function (html_code) {
         return $sce.trustAsHtml(html_code);
@@ -124,6 +124,16 @@
 
       };
 
+      $scope.reloadMap = function () {
+
+        window.setTimeout(function () {
+
+          window.map.invalidateSize();
+
+        });
+
+      };
+
     }
 
     app.controller("main", ["$scope", "$sce", "$rootScope", main])
@@ -133,7 +143,7 @@
     // Provide your access token
     L.mapbox.accessToken = 'pk.eyJ1IjoiZmlsaXBuZXN0IiwiYSI6ImQybTBtS3MifQ.7UzMMtWKkiQtA-UkMCVxdg';
     // Create a map in the div #map
-    var map = L.mapbox.map('map', 'filipnest.ga46fcfi');
+    window.map = L.mapbox.map('map', 'filipnest.ga46fcfi');
 
     //Console log of coordinates for debug/new markers.
 

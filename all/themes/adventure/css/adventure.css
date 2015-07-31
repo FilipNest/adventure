@@ -30,6 +30,9 @@ header {
   z-index: 1;
   position: relative;
 }
+
+#editMode {position:fixed; bottom:0px; left:0px; background-color: #73b6e6; color:white; padding:5px; font-weight: bold;}
+
 #map {
   position: absolute;
   overflow: hidden;

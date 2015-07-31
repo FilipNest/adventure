@@ -32,15 +32,7 @@ if($flags){
 
       <button ng-show="admin === 1" ng-class="{selected: section == 'edit'}" ng-click="section='edit'">Edit</button>
       
-      <?php
-      if ($user->uid === $node->uid) {
-   
-    print flag_create_link('current_adventure', $node->nid);
-
-  }
-?>
-
-        <button id="map-button" ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
+        <button id="map-button" ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'; reloadMap()">Map</button>
         <button id="messages-button" ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
         <button id="self-button" ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Self</button>
 
@@ -114,6 +106,25 @@ if($flags){
     <section id="mapview" ng-show="section == 'mapView'">
 
       <div id="map"></div>
+      
+    <?php
+      
+      if($owner){
+  
+      if ($user->uid === $node->uid) {
+   
+    print "<div id='editMode' ng-show=section == 'mapView'>";
+    print flag_create_link('current_adventure', $node->nid);
+    print "</div>";
+
+  }
+ 
+  print "<div id='coords' ng-show=section == 'mapView'>Tap a place on the map for coordinates.</div>";
+  
+}
+
+?>
+      
 
     </section>
 
@@ -151,12 +162,6 @@ global $user;
 if(!$owner){
  
   $owner = "false";
-  
-}
-
-if($owner){
- 
-  print "<div id='coords'>Tap a place on the map for coordinates.</div>";
   
 }
 
