@@ -53,10 +53,11 @@ button {
 button.selected {
   -webkit-filter: grayscale(0);
 }
-
-.node-type-page { background-color: #73b6e6;}
+.node-type-page {
+  background-color: #73b6e6;
+}
 #page-main {
-  color:white;
+  color: white;
   position: relative;
   top: 68px;
   margin: auto;
@@ -69,14 +70,38 @@ button.selected {
   text-shadow: -.04em .04em #59595A;
   text-align: left;
 }
+.front-logo {
+  width: 150px;
+  vertical-align: bottom;
+  margin: auto;
+  display: block;
+}
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
 
+ul.menu {padding:0px;}
+ul.menu li {
+  list-style:none !important;
+  display: inline-block !important;
+  padding: 5px;
+  background-color: white;
+  color: #73B6E6;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  font-weight: bold;
+}
+ul.menu li:hover {
+  background-color: #59595A;
+  color: white;
+}
 
-.front-logo {width:150px; vertical-align: bottom; margin: auto; display: block;}
-  
-a:link, a:visited, a:active {text-decoration: none; color:inherit;}
-
-a.button {display: inline-block; padding:10px; background-color:white; color:#73B6E6; margin-right:10px; border-style:solid; border-width:2px; border-color: transparent; font-weight: bold;}
-a.button:hover {background-color:#59595A; color: white;}
 
 body {
   font-size: 16px;
@@ -118,17 +143,7 @@ h2 {
   border-style: solid;
   padding-bottom: 10px;
 }
-.edit-thing,
-.create-thing {
-  background-color: white;
-  border-style: solid;
-  color: #59595A;
-  padding: 5px;
-  display: inline-block;
-  margin: 10px 0 10px 0;
-  border-width: 1px;
-  cursor: pointer;
-}
+
 #thing-form {
   border-style: solid;
   border-width: 2px 0 0 0;
@@ -196,3 +211,117 @@ h2 {
   line-height: 50px;
   background-position: center;
 }
+.page-node-add-adventure, .page-user-login, .page-adventures {
+  padding: 10px;
+  width:600px;
+  margin: auto;
+}
+
+#coords {padding:5px; width:350px; background-color:white; position:fixed; bottom:0px; right:0px;}
+
+.page-adventures .view-header {margin-bottom: 40px;}
+
+#block-views-adventures-block {
+  padding: 10px;
+  position: relative;
+  top: 80px;
+  color: white;
+}
+.view-adventures h3,
+.view-adventures h2 {
+  padding: 0px;
+  margin: 0px;
+}
+.view-adventures .views-row {
+  width: 250px;
+  float: left;
+}
+.view-adventures img {
+  margin-top: 10px;
+  border-style: solid;
+  border-color: white;
+  border-width: 4px;
+}
+
+#editableviews-entity-form-current-adventure td.views-field {display: block;}
+
+#editableviews-entity-form-current-adventure tr.even, #editableviews-entity-form-current-adventure tr.odd {background-color:#73B6E6; padding:10px; color:white; display: block;}
+
+.view-editable-things .views-field-nothing {
+ 
+  cursor: pointer;
+  background-color: #73B6E6;
+  color: white;
+  margin-right: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  font-weight: bold;
+  
+}
+
+.view-editable-things .views-field-delete-node {
+ 
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  margin-right: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  font-weight: bold;
+  
+}
+
+.view-editable-things .views-field-title {font-weight: bold; background-color:#59595A; color:white;}
+
+#editableviews-entity-form-current-adventure #edit-actions-submit {
+ 
+  width:100px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #73B6E6;
+  color: white;
+  margin-right: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  font-weight: bold;
+
+}
+
+.view-editable-things {border-style:solid; border-color:#59595A; border-width:2px 0 0 0; padding:5px;}
+
+.view-editable-things td {padding:5px;}
+
+.view-editable-things p {margin-left:5px;}
+
+.view-editable-things .create-thing {
+ 
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #73B6E6;
+  color: white;
+  margin-right: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  font-weight: bold;
+  
+}
+
+#edit {position: relative; top:66px;}
+#edit .file {display: none;}
+#edit .file-size {display: none;}
+.views-row-edit-static {display: none;}
+
+.password-strength, .password-suggestions {display: none;}
+
+.tabledrag-toggle-weight {display: none;}
+
+.page-toboggan-denied {padding:10px;}
+
+.filter-wrapper {display: none;}
+.ckeditor_links {display: none !important;}

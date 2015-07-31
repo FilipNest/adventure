@@ -20,7 +20,11 @@
       angular.bootstrap(document, ['app']);
     });
 
-    function main($scope) {
+    function main($scope,$sce,$rootScope) {
+
+      $rootScope.renderHtml = function (html_code) {
+        return $sce.trustAsHtml(html_code);
+      };
 
       $(document).on("actionWithMessage", function () {
 
@@ -78,7 +82,7 @@
                 var myIcon = L.icon({
                   iconUrl: thing.icon.path,
                   iconSize: [thing.icon.width, thing.icon.height],
-                  iconAnchor: [thing.icon.width/2, thing.icon.height/2],
+                  iconAnchor: [thing.icon.width / 2, thing.icon.height / 2],
                 });
 
                 marker.setIcon(myIcon);
@@ -122,7 +126,7 @@
 
     }
 
-    app.controller("main", ["$scope", main])
+    app.controller("main", ["$scope", "$sce", "$rootScope", main])
 
     //Map!
 
@@ -134,7 +138,7 @@
     //Console log of coordinates for debug/new markers.
 
     map.on('click', function (e) {
-      console.log(e.latlng.lat + ", " + e.latlng.lng)
+      $("#coords").text(e.latlng.lat + ", " + e.latlng.lng);
     });
 
     var activeLayers = [];

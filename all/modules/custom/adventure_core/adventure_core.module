@@ -31,6 +31,14 @@ function adventure_core_menu() {
   return $items;
 }
 
+
+//Remove menu style
+
+
+function adventure_core_css_alter(&$css) { 
+    unset($css[drupal_get_path('module','system').'/system.menus.css']); 
+}
+
 function adventure_core_thing_edit_form($node) {
   
   global $user;

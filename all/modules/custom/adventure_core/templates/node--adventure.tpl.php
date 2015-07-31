@@ -22,7 +22,7 @@ if($flags){
 
   }
 
-} 
+}
 
 ?>
 
@@ -30,31 +30,33 @@ if($flags){
 
     <header>
 
-      <button ng-show="admin === 1" ng-class="{selected: section == 'edit'}" ng-click="section = 'edit'">Edit</button>
-     
-    <?php
+      <button ng-show="admin === 1" ng-class="{selected: section == 'edit'}" ng-click="section='edit'">Edit</button>
+      
+      <?php
       if ($user->uid === $node->uid) {
    
     print flag_create_link('current_adventure', $node->nid);
 
   }
 ?>
-      
-      <button id="map-button" ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
-      <button id="messages-button" ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
-      <button id="self-button" ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Self</button>
 
-      <div id="home">
-        <a href="/"></a>
-      </div>
-      <span id="home-divider"></span>
+        <button id="map-button" ng-class="{selected: section == 'mapView'}" ng-click="section = 'mapView'">Map</button>
+        <button id="messages-button" ng-class="{selected: section == 'messages'}" ng-click="section = 'messages'">Messages</button>
+        <button id="self-button" ng-class="{selected: section == 'things'}" ng-click="section = 'things'">Self</button>
+
+        <div id="home">
+          <a href="/"></a>
+        </div>
+        <span id="home-divider"></span>
 
     </header>
 
     <section id="edit" ng-show="section == 'edit'">
 
       <?php if ($owner): ?>
-
+      
+              <?php print views_embed_view('current_adventure', 'block'); ?>
+      
         <?php print views_embed_view('editable_things', 'block'); ?>
 
           <?php endif; ?>
@@ -86,7 +88,7 @@ if($flags){
       <article class="message" ng-repeat="item in messages | orderBy:'-timestamp'">
 
         <h1>{{item.title}}</h1>
-        <p>{{item.message}}</p>
+        <p ng-bind-html=$root.renderHtml(item.message)></p>
         <br />
         <small>{{item.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</small>
 
@@ -145,6 +147,18 @@ $options = array(
 drupal_add_js('A.data ='.$result.';', array('type' => 'inline'));
 
 global $user;
+
+if(!$owner){
+ 
+  $owner = "false";
+  
+}
+
+if($owner){
+ 
+  print "<div id='coords'>Tap a place on the map for coordinates.</div>";
+  
+}
 
 drupal_add_js('A.data.owner ='.$owner.';', array('type' => 'inline'));
 
