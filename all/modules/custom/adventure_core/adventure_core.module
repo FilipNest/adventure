@@ -136,7 +136,7 @@ function adventure_core_output($path, $gameid = null) {
     
     $output = array();    
       
-    if($thing->field_thing_icon['und']){
+    if(isset($thing->field_thing_icon['und'])){
      
       $path = image_style_url('icon', $thing->field_thing_icon['und'][0]['uri']);
             
@@ -158,6 +158,15 @@ image_dimensions_scale($dimensions,80,100);
     $output['name'] = $thing->title;
     $output['description'] = $thing->field_thing_description['und'][0]['value'];
         $output['location'] = $thing->field_thing_location['und'][0]['value'];
+    
+   $output['viewing_range'] = $thing->field_thing_viewing_range['und'][0]['value'];
+    
+    if($output['viewing_range'] === "0"){
+    
+      $output['viewing_range'] = null;
+      
+    }
+    
     $output['value'] = $thing->field_thing_value['und'][0]['value'];
     
     //Get viewing requirements

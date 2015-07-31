@@ -105,15 +105,15 @@ if($flags){
       
     <?php
       
-      if($owner){
-  
-      if ($user->uid === $node->uid) {
+  if ($user->uid === $node->uid) {
    
     print "<div id='editMode' ng-show=section == 'mapView'>";
     print flag_create_link('current_adventure', $node->nid);
     print "</div>";
 
   }
+
+if($owner){
  
   print "<div id='coords' ng-show=section == 'mapView'>Tap a place on the map for coordinates.</div>";
   

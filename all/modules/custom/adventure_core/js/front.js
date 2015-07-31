@@ -2,13 +2,46 @@
 
   $(document).ready(function () {
 
+    //Set up map
+
+    //Map!
+
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZmlsaXBuZXN0IiwiYSI6ImQybTBtS3MifQ.7UzMMtWKkiQtA-UkMCVxdg';
+    // Create a map in the div #map
+    window.map = L.mapbox.map('map', 'filipnest.ga46fcfi');
+
+    //Watch a user's location if admin mode is off
+
+    window.setInterval(function () {
+      map.locate();
+    }, 1000);
+
+    window.me = L.mapbox.featureLayer().addTo(map);
+
+    map.on('locationfound', function (e) {
+
+      me.setGeoJSON({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [e.latlng.lng, e.latlng.lat]
+        },
+        properties: {
+          'marker-color': '#73b6e6',
+          'marker-symbol': 'circle-stroked'
+        }
+      });
+
+    });
+
     A.messages = [];
 
     //Set up objects
 
     $.each(A.data.rawThings, function (index, element) {
 
-      new A.thing(element.id, element.name, element.description, element.value, element.viewing_requirements, element.choices, element.location, element.icon);
+      new A.thing(element.id, element.name, element.description, element.value, element.viewing_requirements, element.choices, element.location, element.icon, element.viewing_range);
 
     });
 
@@ -90,11 +123,36 @@
 
               }
 
-              marker.on("click", function () {
+              marker.on("click", function (e) {
 
-                $scope.currentThing = thing;
-                $scope.section = "choices";
-                $scope.$apply();
+                var locationMarker = window.me;
+
+                if (!$scope.admin) {
+
+                  var currentLocation = L.latLng(locationMarker._geojson.geometry.coordinates[1], locationMarker._geojson.geometry.coordinates[0]);
+
+                  var distance = currentLocation.distanceTo(e.latlng);
+
+                  if (thing.viewing_range && distance > thing.viewing_range) {
+
+                    console.log("Too far away");
+                    return false;
+
+                  } else {
+
+                    $scope.currentThing = thing;
+                    $scope.section = "choices";
+                    $scope.$apply();
+
+                  }
+
+                } else {
+
+                  $scope.currentThing = thing;
+                  $scope.section = "choices";
+                  $scope.$apply();
+
+                }
 
               });
 
@@ -137,13 +195,6 @@
     }
 
     app.controller("main", ["$scope", "$sce", "$rootScope", main])
-
-    //Map!
-
-    // Provide your access token
-    L.mapbox.accessToken = 'pk.eyJ1IjoiZmlsaXBuZXN0IiwiYSI6ImQybTBtS3MifQ.7UzMMtWKkiQtA-UkMCVxdg';
-    // Create a map in the div #map
-    window.map = L.mapbox.map('map', 'filipnest.ga46fcfi');
 
     //Console log of coordinates for debug/new markers.
 
