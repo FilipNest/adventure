@@ -13,9 +13,11 @@
 
     //Watch a user's location if admin mode is off
 
+    map.locate();
+    
     window.setInterval(function () {
       map.locate();
-    }, 1000);
+    }, 600000);
 
     window.me = L.mapbox.featureLayer().addTo(map);
 
