@@ -68,7 +68,6 @@ if($flags){
         <br /> {{currentThing.value}}
       </p>
 
-      <h2>Choices</h2>
       <ul>
         <li class="choice" ng-if="choice.visibility" ng-repeat="choice in currentThing.choices" ng-click="choice.trigger()" ;>{{choice.text}}</li>
       </ul>
@@ -89,17 +88,14 @@ if($flags){
     </section>
 
     <section id="things" ng-show="section == 'things'">
-
-      <li ng-repeat="thing in things" ng-if="thing.visibility && thing.location == 'home'">
+<h1>Home</h1>
+      <p>This is where all things in the home location will go.</p>
+      <div class="home-thing" ng-repeat="thing in things" ng-if="thing.visibility && thing.location == 'home'">
         <b>{{thing.name}}</b>
         <br />
-        <span>{{thing.description}}</span>
-        <br />
-        <span>{{thing.location}}</span>
-        <br />
-        <span>{{thing.value}}</span>
+        <span ng-if="thing.value">Status: {{thing.value}}</span><br />
         <button ng-click=selectThing(thing)>Open</button>
-      </li>
+      </div>
 
     </section>
 
